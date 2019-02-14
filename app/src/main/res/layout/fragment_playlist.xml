@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/txttitleplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NHỊP SỐNG TUỔI TRẺ"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#3E3D3D"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp" />
+    <ListView
+        android:layout_below="@+id/txttitleplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvplaylist"></ListView>
+    <TextView
+        android:background="#9E9696"
+        android:id="@+id/txtmoreplaylist"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="#000000"
+        android:paddingLeft="5dp"
+        android:drawableLeft="@drawable/iconmoreplaylist"
+        android:drawablePadding="10dp"
+        android:textSize="19sp"
+        android:text="Xem thêm"
+        android:layout_below="@+id/lvplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

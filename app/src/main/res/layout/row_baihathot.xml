@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgbaihathot"
+        android:layout_margin = "4dp"
+        android:scaleType="fitXY"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+    <TextView
+        android:id="@+id/txttenbathathot"
+        android:layout_toRightOf="@id/imgbaihathot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Chạy ngay đi"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/txttencasibathathot"
+        android:layout_toRightOf="@id/imgbaihathot"
+        android:layout_below="@id/txttenbathathot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:maxWidth="200dp"
+        android:text="Sơn Tùng M-TP"
+        android:textSize="16sp"
+        android:textColor="#000000"/>
+    <ImageView
+        android:id="@+id/imgluotthich"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/iconlove"/>
+</RelativeLayout>

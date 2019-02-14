@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/txtdanhsachindex"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/txttenbaihat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/txtdanhsachindex"
+            android:maxWidth="250dp"
+            android:ellipsize="end"
+            android:text="Chắc Đó Sẽ Về"
+            android:singleLine="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+        <TextView
+            android:id="@+id/txttencasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txttenbaihat"
+            android:layout_toRightOf="@+id/txtdanhsachindex"
+            android:maxWidth="250dp"
+            android:ellipsize="end"
+            android:text="Sơn Tùng M-TP"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:textColor="#837D7D" />
+
+        <ImageView
+            android:id="@+id/imgluotthichdanhsachbaihat"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iconlove" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
