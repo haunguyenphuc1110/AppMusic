@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appmusic.Activity.TrinhPhatNhacActivity;
 import com.example.appmusic.Model.BaiHat;
@@ -72,7 +73,12 @@ public class DanhSachBaiHatAdapter extends RecyclerView.Adapter<DanhSachBaiHatAd
                     callback.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-
+                            String result = response.body();
+                            if (result.equals("Success")){
+                                Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
