@@ -23,18 +23,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Bai_Hat_Hot extends Fragment {
+public class Fragment_Most_Liked_Music extends Fragment {
     View view;
     RecyclerView recyclerViewBaiHatHot;
     BaiHatHotAdapter baiHatHotAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_bai_hat_hot, container,false);
+        view = inflater.inflate(R.layout.fragment_most_liked_music, container,false);
         recyclerViewBaiHatHot = view.findViewById(R.id.recyclerviewbaihathot);
         getData();
         return view;
     }
+
 
     private void getData() {
         DataService dataService = APIService.getService();

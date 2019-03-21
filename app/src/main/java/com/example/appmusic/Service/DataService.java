@@ -25,7 +25,7 @@ public interface DataService {
     @GET("playlistdisplay.php")
     Call<List<Playlist>> getPlaylistRandom();
 
-    //Get data theme and kind music
+    //Get data category music
     @GET("themeandkinddisplay.php")
     Call<ChuDeTheLoai> getChuDeTheLoai();
 

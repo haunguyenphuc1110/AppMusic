@@ -10,15 +10,14 @@ import android.view.ViewGroup;
 
 import com.example.appmusic.R;
 
-public class Fragment_Trang_Chu extends Fragment {
-
+public class Fragment_Music_Library extends Fragment {
 
     View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_trang_chu,container,false);
+        view = inflater.inflate(R.layout.fragment_music_library, container,false);
         return view;
     }
 }

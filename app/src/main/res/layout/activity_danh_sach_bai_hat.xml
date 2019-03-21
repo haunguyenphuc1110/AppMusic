@@ -48,7 +48,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:backgroundTint="#A845DE"
-        android:src="@drawable/iconfloatingactionbutton"
+        android:src="@drawable/ic_floating_action_button"
         app:fabSize="normal"
         android:id="@+id/floatingactionbutton"
         app:layout_anchorGravity="bottom|center"

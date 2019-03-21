@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/custom_background_trinh_phat_nhac"
     android:weightSum="10"
-    tools:context=".Activity.TrinhPhatNhacActivity">
+    tools:context=".Activity.MusicPlayerActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbartrinhphatnhac"
@@ -73,7 +73,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:src="@drawable/iconsuffle"
+                android:src="@drawable/ic_suffle"
                 android:id="@+id/imgbuttonrandom"
                 android:scaleType="fitXY"
                 android:background="@null"
@@ -82,7 +82,7 @@
                 android:layout_height="50dp" />
 
             <ImageButton
-                android:src="@drawable/iconpreview"
+                android:src="@drawable/ic_preview"
                 android:id="@+id/imgbuttonpreview"
                 android:scaleType="fitXY"
                 android:background="@null"
@@ -91,7 +91,7 @@
                 android:layout_height="60dp" />
 
             <ImageButton
-                android:src="@drawable/iconplay"
+                android:src="@drawable/ic_play"
                 android:id="@+id/imgbuttonplay"
                 android:scaleType="fitXY"
                 android:background="@null"
@@ -100,7 +100,7 @@
                 android:layout_height="70dp" />
 
             <ImageButton
-                android:src="@drawable/iconnext"
+                android:src="@drawable/ic_next"
                 android:id="@+id/imgbuttonnext"
                 android:scaleType="fitXY"
                 android:background="@null"
@@ -109,7 +109,7 @@
                 android:layout_height="60dp" />
 
             <ImageButton
-                android:src="@drawable/iconrepeat"
+                android:src="@drawable/ic_repeat"
                 android:id="@+id/imgbuttonrepeat"
                 android:scaleType="fitXY"
                 android:background="@null"

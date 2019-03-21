@@ -29,9 +29,9 @@ public class Fragment_Banner extends Fragment {
     ViewPager viewPager;
     CircleIndicator circleIndicator;
     BannerAdapter bannerAdapter;
-    Runnable runnable;
-    Handler handler;
-    int currentItem;
+    Runnable runnable;//Like event that called when handler need
+    Handler handler;//Like management
+    int currentItem;//Store current index
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -62,14 +62,18 @@ public class Fragment_Banner extends Fragment {
                     public void run() {
                         currentItem = viewPager.getCurrentItem();
                         currentItem++;
+
+                        //Check if ViewPager go to last current
                         if(currentItem >= viewPager.getAdapter().getCount()){
                             currentItem = 0;
                         }
+
+                        //Else if normal
                         viewPager.setCurrentItem(currentItem,true);
                         handler.postDelayed(runnable,4500);
                     }
                 };
-                handler.postDelayed(runnable,4500);
+                handler.postDelayed(runnable,4500);//Display 4.5 second
             }
 
             @Override

@@ -31,11 +31,15 @@ public class BannerAdapter extends PagerAdapter {
         return arrBanner.size();
     }
 
+
+    //Return boolean value when compare view through object that you want to custom
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
         return view == o;
     }
 
+
+    //Custom object
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {

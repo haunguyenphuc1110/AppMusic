@@ -1,5 +1,6 @@
 package com.example.appmusic.Activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -11,15 +12,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.appmusic.Adapter.ViewPagerPhatDanhSachNhac;
-import com.example.appmusic.Fragment.Fragment_Dia_Nhac;
-import com.example.appmusic.Fragment.Fragment_Phat_Danh_Sach_Nhac;
+import com.example.appmusic.Fragment.Fragment_Music_Disc;
+import com.example.appmusic.Fragment.Fragment_Music_Lyric;
+import com.example.appmusic.Fragment.Fragment_Playing_List;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;
 
@@ -28,16 +29,20 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TrinhPhatNhacActivity extends AppCompatActivity {
+import dmax.dialog.SpotsDialog;
+
+public class MusicPlayerActivity extends AppCompatActivity {
 
     Toolbar toolBarPhatNhac;
     SeekBar skTime;
     TextView txtTime, txtTotalTime;
     ImageButton imgPlay, imgNext, imgPrevious, imgRandom, imgRepeat;
-    ViewPager viewPagerPhatNhac;
+    ViewPager viewPagerPhatNhac;//View pager chua cac fragment
+    AlertDialog dialog;//Show dialog
 
-    Fragment_Dia_Nhac fragment_dia_nhac;
-    Fragment_Phat_Danh_Sach_Nhac fragment_phat_danh_sach_nhac;
+    Fragment_Music_Disc fragment_music_disc;
+    Fragment_Playing_List fragment_playing_list;
+    Fragment_Music_Lyric fragment_music_lyric;
 
     MediaPlayer mediaPlayer;
 
@@ -53,7 +58,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trinh_phat_nhac);
+        setContentView(R.layout.activity_music_player);
 
 
         //Kiem tra tin hieu mang
@@ -97,7 +102,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
             public void run() {
                 if (adapterPhatDanhSachNhac.getItem(1) != null) {
                     if (arrBaiHatCommon.size() > 0) {
-                        fragment_dia_nhac.playNhac(arrBaiHatCommon.get(0).getHinhBaiHat());
+                        fragment_music_disc.playNhac(arrBaiHatCommon.get(0).getHinhBaiHat());
                         handler.removeCallbacks(this);
                     } else {
                         handler.postDelayed(this, 300);
@@ -111,10 +116,10 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-                    imgPlay.setImageResource(R.drawable.iconplay);
+                    imgPlay.setImageResource(R.drawable.ic_play);
                 } else {
                     mediaPlayer.start();
-                    imgPlay.setImageResource(R.drawable.iconpause);
+                    imgPlay.setImageResource(R.drawable.ic_pause);
                 }
             }
         });
@@ -126,14 +131,14 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                     //Neu nut Random dang bat
                     if (isRandom == true) {
                         isRandom = false;//Set lai bang false
-                        imgRepeat.setImageResource(R.drawable.iconsyned);
-                        imgRandom.setImageResource(R.drawable.iconsuffle);
+                        imgRepeat.setImageResource(R.drawable.ic_syned);
+                        imgRandom.setImageResource(R.drawable.ic_suffle);
                     }
                     //Set binh thuong neu nut Random khong bat
-                    imgRepeat.setImageResource(R.drawable.iconsyned);
+                    imgRepeat.setImageResource(R.drawable.ic_syned);
                     isRepeat = true;
                 } else {
-                    imgRepeat.setImageResource(R.drawable.iconrepeat);
+                    imgRepeat.setImageResource(R.drawable.ic_repeat);
                     isRepeat = false;
                 }
             }
@@ -146,14 +151,14 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                     //Neu nut Repeat dang bat
                     if (isRepeat == true) {
                         isRepeat = false;//Set lai bang false
-                        imgRandom.setImageResource(R.drawable.iconshuffled);
-                        imgRepeat.setImageResource(R.drawable.iconrepeat);
+                        imgRandom.setImageResource(R.drawable.ic_shuffled);
+                        imgRepeat.setImageResource(R.drawable.ic_repeat);
                     }
                     //Set binh thuong neu nut Repeat khong bat
-                    imgRandom.setImageResource(R.drawable.iconshuffled);
+                    imgRandom.setImageResource(R.drawable.ic_shuffled);
                     isRandom = true;
                 } else {
-                    imgRandom.setImageResource(R.drawable.iconsuffle);
+                    imgRandom.setImageResource(R.drawable.ic_suffle);
                     isRandom = false;
                 }
             }
@@ -186,7 +191,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                         mediaPlayer = null;
                     }
                     if (position < arrBaiHatCommon.size()) {
-                        imgPlay.setImageResource(R.drawable.iconpause);
+                        imgPlay.setImageResource(R.drawable.ic_pause);
                         position++;
                         if (isRepeat == true) {
                             if (position == 0) {
@@ -206,7 +211,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                             position = 0;
                         }
                         new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.playNhac(arrBaiHatCommon.get(position).getHinhBaiHat());
+                        fragment_music_disc.playNhac(arrBaiHatCommon.get(position).getHinhBaiHat());
                         getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
                         updateTimeSong();
                     }
@@ -234,7 +239,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                         mediaPlayer = null;
                     }
                     if (position < arrBaiHatCommon.size()) {
-                        imgPlay.setImageResource(R.drawable.iconpause);
+                        imgPlay.setImageResource(R.drawable.ic_pause);
                         position--;
 
                         if (position < 0) {
@@ -253,7 +258,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                             position = index;
                         }
                         new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.playNhac(arrBaiHatCommon.get(position).getHinhBaiHat());
+                        fragment_music_disc.playNhac(arrBaiHatCommon.get(position).getHinhBaiHat());
                         getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
                         updateTimeSong();
                     }
@@ -315,25 +320,26 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
         toolBarPhatNhac.setTitleTextColor(Color.WHITE);
 
 
-        fragment_dia_nhac = new Fragment_Dia_Nhac();
-        fragment_phat_danh_sach_nhac = new Fragment_Phat_Danh_Sach_Nhac();
+        fragment_music_disc = new Fragment_Music_Disc();
+        fragment_playing_list = new Fragment_Playing_List();
+        fragment_music_lyric = new Fragment_Music_Lyric();
 
 
         adapterPhatDanhSachNhac = new ViewPagerPhatDanhSachNhac(getSupportFragmentManager());
 
-        adapterPhatDanhSachNhac.addFragment(fragment_phat_danh_sach_nhac);
-        adapterPhatDanhSachNhac.addFragment(fragment_dia_nhac);
+        adapterPhatDanhSachNhac.addFragment(fragment_playing_list);
+        adapterPhatDanhSachNhac.addFragment(fragment_music_disc);
+        adapterPhatDanhSachNhac.addFragment(fragment_music_lyric);
 
 
         viewPagerPhatNhac.setAdapter(adapterPhatDanhSachNhac);
 
-        fragment_dia_nhac = (Fragment_Dia_Nhac) adapterPhatDanhSachNhac.getItem(1);
+        fragment_music_disc = (Fragment_Music_Disc) adapterPhatDanhSachNhac.getItem(1);
 
         if (arrBaiHatCommon.size() > 0) {
             getSupportActionBar().setTitle(arrBaiHatCommon.get(0).getTenBaiHat());
             new MusicPlayer().execute(arrBaiHatCommon.get(0).getLinkBaiHat());
-            imgPlay.setImageResource(R.drawable.iconpause);
-
+            imgPlay.setImageResource(R.drawable.ic_pause);
         }
     }
 
@@ -404,7 +410,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
             public void run() {
                 if (isNext == true) {
                     if (position < arrBaiHatCommon.size()) {
-                        imgPlay.setImageResource(R.drawable.iconpause);
+                        imgPlay.setImageResource(R.drawable.ic_pause);
                         position++;
                         if (isRepeat == true) {
                             if (position == 0) {
@@ -424,7 +430,7 @@ public class TrinhPhatNhacActivity extends AppCompatActivity {
                             position = 0;
                         }
                         new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                        fragment_dia_nhac.playNhac(arrBaiHatCommon.get(position).getLinkBaiHat());
+                        fragment_music_disc.playNhac(arrBaiHatCommon.get(position).getLinkBaiHat());
                         getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
                     }
                     imgPrevious.setClickable(false);

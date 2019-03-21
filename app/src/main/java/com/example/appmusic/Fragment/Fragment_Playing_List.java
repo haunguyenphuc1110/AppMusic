@@ -10,25 +10,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.appmusic.Activity.TrinhPhatNhacActivity;
-import com.example.appmusic.Adapter.TrinhPhatNhacAdapter;
+import com.example.appmusic.Activity.MusicPlayerActivity;
+import com.example.appmusic.Adapter.PlayingListAdapter;
 import com.example.appmusic.R;
 
-public class Fragment_Phat_Danh_Sach_Nhac extends Fragment {
+public class Fragment_Playing_List extends Fragment {
 
     View view;
     RecyclerView recyclerViewPhatNhac;
-    TrinhPhatNhacAdapter trinhPhatNhacAdapter;
+    PlayingListAdapter playingListAdapter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_phat_danh_sach_nhac, container, false);
+        view = inflater.inflate(R.layout.fragment_playing_list, container, false);
         recyclerViewPhatNhac = view.findViewById(R.id.recyclerviewPhatDanhSachNhac);
 
-        if (TrinhPhatNhacActivity.arrBaiHatCommon.size() > 0){
-            trinhPhatNhacAdapter = new TrinhPhatNhacAdapter(getActivity(), TrinhPhatNhacActivity.arrBaiHatCommon);
+        if (MusicPlayerActivity.arrBaiHatCommon.size() > 0){
+            playingListAdapter = new PlayingListAdapter(getActivity(), MusicPlayerActivity.arrBaiHatCommon);
             recyclerViewPhatNhac.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerViewPhatNhac.setAdapter(trinhPhatNhacAdapter);
+            recyclerViewPhatNhac.setAdapter(playingListAdapter);
         }
 
         return view;

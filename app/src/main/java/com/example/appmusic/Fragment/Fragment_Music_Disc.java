@@ -2,7 +2,6 @@ package com.example.appmusic.Fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,7 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Fragment_Dia_Nhac extends Fragment {
+public class Fragment_Music_Disc extends Fragment {
 
     View view;
     CircleImageView circleImageView;
@@ -25,7 +24,7 @@ public class Fragment_Dia_Nhac extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_dia_nhac, container, false);
+        view = inflater.inflate(R.layout.fragment_music_disc, container, false);
         circleImageView = view.findViewById(R.id.imgcircle);
         objectAnimator = objectAnimator.ofFloat(circleImageView, "rotation", 0f, 360f);
         objectAnimator.setDuration(10000);

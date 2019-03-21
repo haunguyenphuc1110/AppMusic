@@ -4,9 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
+    android:id="@+id/swipe_refresh"
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgaccount"
+            android:src="@drawable/ic_avatar"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnsearch"
+            android:drawableLeft="@drawable/ic_search_24px"
+            android:text="Tìm kiếm bài hát, playlist,..."
+            android:gravity="center_vertical"
+            android:textAllCaps="false"
+            android:background="@color/colorWhite"
+            android:layout_margin="10dp"
+            android:textStyle="normal"
+            android:textColor="#949090"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="5dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="#000000"/>
+
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/myViewPager"
@@ -21,8 +66,10 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="#9A28AD"
         app:tabTextColor="#000000"
+        app:tabTextAppearance="@style/capfalse"
         android:layout_weight="1"
         android:background="@android:color/transparent"
         android:layout_height="0dp"></android.support.design.widget.TabLayout>
+
 
 </LinearLayout>

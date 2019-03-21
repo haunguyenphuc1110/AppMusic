@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--Main Fragment- The place where add other fragments-->
 <ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
     android:fillViewport="true">
@@ -30,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.appmusic.Fragment.Fragment_Bai_Hat_Hot"
+            android:name="com.example.appmusic.Fragment.Fragment_Most_Liked_Music"
             android:id="@+id/fragmentbaihathot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

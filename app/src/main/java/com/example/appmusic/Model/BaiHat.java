@@ -23,6 +23,9 @@ public class BaiHat implements Parcelable {
     @SerializedName("LinkBaiHat")
     @Expose
     private String linkBaiHat;
+    @SerializedName("LoiBaiHat")
+    @Expose
+    private String loiBaiHat;
     @SerializedName("LuotThich")
     @Expose
     private String luotThich;
@@ -33,6 +36,7 @@ public class BaiHat implements Parcelable {
         hinhBaiHat = in.readString();
         caSi = in.readString();
         linkBaiHat = in.readString();
+        loiBaiHat = in.readString();
         luotThich = in.readString();
     }
 
@@ -88,6 +92,14 @@ public class BaiHat implements Parcelable {
         this.linkBaiHat = linkBaiHat;
     }
 
+    public String getLoiBaiHat(){
+        return loiBaiHat;
+    }
+
+    public void setLoiBaiHat(String loiBaiHat){
+        this.loiBaiHat = loiBaiHat;
+    }
+
     public String getLuotThich() {
         return luotThich;
     }
@@ -108,6 +120,7 @@ public class BaiHat implements Parcelable {
         parcel.writeString(hinhBaiHat);
         parcel.writeString(caSi);
         parcel.writeString(linkBaiHat);
+        parcel.writeString(loiBaiHat);
         parcel.writeString(luotThich);
     }
 }

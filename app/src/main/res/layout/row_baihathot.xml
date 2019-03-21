@@ -42,5 +42,5 @@
         android:layout_marginTop="40dp"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@drawable/iconlove"/>
+        android:src="@drawable/ic_love"/>
 </RelativeLayout>

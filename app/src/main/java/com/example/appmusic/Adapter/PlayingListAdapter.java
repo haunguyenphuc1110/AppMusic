@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.appmusic.Model.BaiHat;
@@ -14,11 +13,11 @@ import com.example.appmusic.R;
 
 import java.util.ArrayList;
 
-public class TrinhPhatNhacAdapter extends RecyclerView.Adapter<TrinhPhatNhacAdapter.ViewHolder>{
+public class PlayingListAdapter extends RecyclerView.Adapter<PlayingListAdapter.ViewHolder>{
     Context context;
     ArrayList<BaiHat> arrBaiHat;
 
-    public TrinhPhatNhacAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
+    public PlayingListAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
         this.context = context;
         this.arrBaiHat = arrBaiHat;
     }
@@ -27,7 +26,7 @@ public class TrinhPhatNhacAdapter extends RecyclerView.Adapter<TrinhPhatNhacAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row_phat_nhac, viewGroup, false);
+        View view = inflater.inflate(R.layout.row_playing_list, viewGroup, false);
         return new ViewHolder(view);
     }
 

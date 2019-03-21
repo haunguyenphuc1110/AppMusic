@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appmusic.Activity.TrinhPhatNhacActivity;
+import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -24,12 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapter.ViewHolder> {
+//Set up Adapter, set up data into every row on layout fragment_search
+public class SongSearchingAdapter extends RecyclerView.Adapter<SongSearchingAdapter.ViewHolder> {
 
     Context context;
     ArrayList<BaiHat> arrBaiHat;
 
-    public SearchBaiHatAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
+    public SongSearchingAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
         this.context = context;
         this.arrBaiHat = arrBaiHat;
     }
@@ -38,7 +39,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.row_search_bai_hat, viewGroup, false);
+        View view = inflater.inflate(R.layout.row_search_song, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -70,7 +71,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    imgLuotThich.setImageResource(R.drawable.iconloved);
+                    imgLuotThich.setImageResource(R.drawable.ic_loved);
                     DataService dataService = APIService.getService();
                     Call<String> callback =dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
                     callback.enqueue(new Callback<String>() {
@@ -96,7 +97,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, TrinhPhatNhacActivity.class);
+                    Intent intent = new Intent(context, MusicPlayerActivity.class);
                     intent.putExtra("cakhuc", arrBaiHat.get(getPosition()));
                     context.startActivity(intent);
                 }

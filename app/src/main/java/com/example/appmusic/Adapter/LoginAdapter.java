@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+public class LoginAdapter extends FragmentPagerAdapter {
 
-//Add Fragment into ViewPager
-public class MainViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> arrayFragment = new ArrayList<>();
     private ArrayList<String> arrayTitle = new ArrayList<>();
-    public MainViewPagerAdapter(FragmentManager fm) {
+
+    public LoginAdapter(FragmentManager fm) {
         super(fm);
     }
 

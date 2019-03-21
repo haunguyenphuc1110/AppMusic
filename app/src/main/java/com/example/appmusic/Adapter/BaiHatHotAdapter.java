@@ -1,5 +1,6 @@
 package com.example.appmusic.Adapter;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.appmusic.Activity.TrinhPhatNhacActivity;
+import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -59,6 +60,7 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
 
         TextView txtTenBaiHat, txtTenCaSi;
         ImageView imgHinhBaiHat, imgLuotThich;
+        public ProgressDialog progressDialog;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -70,16 +72,18 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, TrinhPhatNhacActivity.class);
+                    showProgressDialog(context);
+                    Intent intent = new Intent(context, MusicPlayerActivity.class);
                     intent.putExtra("cakhuc", arrBaiHat.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
 
+
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    imgLuotThich.setImageResource(R.drawable.iconloved);
+                    imgLuotThich.setImageResource(R.drawable.ic_loved);
                     DataService dataService = APIService.getService();
                     Call<String> callback =dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
                     callback.enqueue(new Callback<String>() {
@@ -103,6 +107,20 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
             });
 
 
+        }
+        private void showProgressDialog(Context contex){
+            if(progressDialog != null) {
+                progressDialog.dismiss();
+                progressDialog = null;
+            }
+            progressDialog = ProgressDialog.show(context, "", "Please wait...");
+        }
+
+        public void hideProgressDialog() {
+            if(this.progressDialog != null) {
+                this.progressDialog.dismiss();
+                this.progressDialog = null;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.appmusic.Activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,7 +19,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.appmusic.Adapter.DanhSachBaiHatAdapter;
 import com.example.appmusic.Model.Album;
@@ -54,6 +55,8 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     Playlist playlist;
     TheLoai theLoai;
     Album album;
+    ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +65,7 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //Get data from Banner to DanhSachBaiHatActivity
+        //Get data from Banner, playlist, album, concept to DanhSachBaiHatActivity
         getData();
 
         //Anh Xa cac thanh phan trong layout
@@ -244,11 +247,33 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DanhSachBaiHatActivity.this, TrinhPhatNhacActivity.class);
+                showProgressDialog(DanhSachBaiHatActivity.this);
+                Intent intent = new Intent(DanhSachBaiHatActivity.this, MusicPlayerActivity.class);
                 intent.putExtra("danhsachcakhuc", arrBaiHat);
                 startActivity(intent);
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        hideProgressDialog();
+        super.onResume();
+    }
+
+    private void showProgressDialog(Context context){
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+        progressDialog = ProgressDialog.show(context, "", "Please wait...");
+    }
+
+    public void hideProgressDialog() {
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 }

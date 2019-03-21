@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppMusic</string>
+    <string name="facebook_app_id">2169815143057960</string>
+    <string name="google_client_id">70373298688-ol4897vj5ua8pths2upd3gr94mv2p21q.apps.googleusercontent.com</string>
 </resources>
