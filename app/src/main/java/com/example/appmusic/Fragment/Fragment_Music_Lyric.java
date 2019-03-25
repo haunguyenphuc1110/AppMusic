@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Adapter.MusicLyricAdapter;
 import com.example.appmusic.R;
+import com.example.appmusic.Service.APIService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,7 +46,6 @@ public class Fragment_Music_Lyric extends Fragment {
                     rowLyrics.add(new String(line));
                 }
                 in.close();
-
             }
             catch (MalformedURLException e) {
                 System.out.println("Malformed URL: " + e.getMessage());

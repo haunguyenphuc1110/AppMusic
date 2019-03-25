@@ -1,6 +1,5 @@
 package com.example.appmusic.Adapter;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appmusic.Activity.MainActivity;
 import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;
@@ -25,30 +25,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.ViewHolder> {
+public class MusicLibraryAdapter extends RecyclerView.Adapter<MusicLibraryAdapter.ViewHoler> {
+
     Context context;
     ArrayList<BaiHat> arrBaiHat;
 
-    public BaiHatHotAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
+    public MusicLibraryAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
         this.context = context;
         this.arrBaiHat = arrBaiHat;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ViewHoler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  = inflater.inflate(R.layout.row_baihathot,viewGroup, false);
-        return new ViewHolder(view);
+        View view  = inflater.inflate(R.layout.row_music_library,viewGroup, false);
+        return new ViewHoler(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHoler viewHoler, int i) {
         BaiHat baihat = arrBaiHat.get(i);
-        viewHolder.txtTenBaiHat.setText(baihat.getTenBaiHat());
-        viewHolder.txtTenCaSi.setText(baihat.getCaSi());
-        Picasso.with(context).load(baihat.getHinhBaiHat()).into(viewHolder.imgHinhBaiHat);
-
+        viewHoler.txtTenBaiHat.setText(baihat.getTenBaiHat());
+        viewHoler.txtTenCaSi.setText(baihat.getCaSi());
+        Picasso.with(context).load(baihat.getHinhBaiHat()).into(viewHoler.imgHinhBaiHat);
     }
 
     @Override
@@ -56,29 +56,27 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
         return arrBaiHat.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHoler extends RecyclerView.ViewHolder{
 
         TextView txtTenBaiHat, txtTenCaSi;
-        ImageView imgHinhBaiHat, imgLuotThich;
-        public ProgressDialog progressDialog;
+        ImageView imgLuotThich, imgHinhBaiHat, imgPlaylistRemove;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHoler(@NonNull View itemView) {
             super(itemView);
-            txtTenBaiHat = itemView.findViewById(R.id.txttenbathathot);
-            txtTenCaSi = itemView.findViewById(R.id.txttencasibathathot);
-            imgHinhBaiHat = itemView.findViewById(R.id.imgbaihathot);
-            imgLuotThich = itemView.findViewById(R.id.imgluotthich);
+            txtTenBaiHat = itemView.findViewById(R.id.txtlibrarytenbaihat);
+            txtTenCaSi = itemView.findViewById(R.id.txtlibrarytencasi);
+            imgHinhBaiHat = itemView.findViewById(R.id.imglibraryhinhbaihat);
+            imgPlaylistRemove = itemView.findViewById(R.id.imglibraryplaylistremove);
+            imgLuotThich = itemView.findViewById(R.id.imglibraryluotthich);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showProgressDialog(context);
                     Intent intent = new Intent(context, MusicPlayerActivity.class);
                     intent.putExtra("cakhuc", arrBaiHat.get(getPosition()));
                     context.startActivity(intent);
                 }
             });
-
 
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,11 +88,8 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
                             String result = response.body();
-                            if (result.equals("Success")){
+                            if (result.equals("Success"))
                                 Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                                Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -106,21 +101,32 @@ public class BaiHatHotAdapter extends RecyclerView.Adapter<BaiHatHotAdapter.View
                 }
             });
 
-
+            imgPlaylistRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    removeFavoritePlaylist(MainActivity.profile.getId(),arrBaiHat.get(getPosition()).getIdBaiHat());
+                    arrBaiHat.remove(getPosition());
+                    notifyDataSetChanged();
+                }
+            });
         }
-        private void showProgressDialog(Context contex){
-            if(progressDialog != null) {
-                progressDialog.dismiss();
-                progressDialog = null;
-            }
-            progressDialog = ProgressDialog.show(context, "", "Please wait...");
-        }
 
-        public void hideProgressDialog() {
-            if(this.progressDialog != null) {
-                this.progressDialog.dismiss();
-                this.progressDialog = null;
-            }
+        private void removeFavoritePlaylist(String id, String idBaiHat) {
+            DataService dataService = APIService.getService();
+            Call<String> callback = dataService.removeUserFavoriteSong(id, idBaiHat);
+            callback.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    String result = response.body();
+                    if (result.equals("Success"))
+                        Toast.makeText(context,"Đã gỡ bài hát khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+
+                }
+            });
         }
     }
 }

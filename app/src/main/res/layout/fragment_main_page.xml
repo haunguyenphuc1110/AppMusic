@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--Main Fragment- The place where add other fragments-->
+<!--Main Fragment- The place where add other fragments including
+    Fragment Banner, Fragment Playlist, Fragment Theme and Category,
+    Fragment Album, Fragment Recommend Music-->
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -23,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.appmusic.Fragment.Fragment_ChuDe_TheLoai"
+            android:name="com.example.appmusic.Fragment.Fragment_Theme_Category"
             android:id="@+id/fragmentchudetheloai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
@@ -33,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.appmusic.Fragment.Fragment_Most_Liked_Music"
+            android:name="com.example.appmusic.Fragment.Fragment_Recommended_Music"
             android:id="@+id/fragmentbaihathot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

@@ -9,19 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.appmusic.Activity.DanhSachTheLoaiTheoChuDeActivity;
+import com.example.appmusic.Activity.CategoryListActivity;
 import com.example.appmusic.Model.ChuDe;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class DanhSachChuDeAdapter extends RecyclerView.Adapter<DanhSachChuDeAdapter.ViewHolder> {
+public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.ViewHolder> {
 
     Context context;
     ArrayList<ChuDe> arrChuDe;
 
-    public DanhSachChuDeAdapter(Context context, ArrayList<ChuDe> arrChuDe) {
+    public ThemeListAdapter(Context context, ArrayList<ChuDe> arrChuDe) {
         this.context = context;
         this.arrChuDe = arrChuDe;
     }
@@ -30,7 +30,7 @@ public class DanhSachChuDeAdapter extends RecyclerView.Adapter<DanhSachChuDeAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  = inflater.inflate(R.layout.row_danh_sach_chude,viewGroup, false);
+        View view  = inflater.inflate(R.layout.row_theme_list,viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -54,7 +54,7 @@ public class DanhSachChuDeAdapter extends RecyclerView.Adapter<DanhSachChuDeAdap
             imgChuDe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DanhSachTheLoaiTheoChuDeActivity.class);
+                    Intent intent = new Intent(context, CategoryListActivity.class);
                     intent.putExtra("chude", arrChuDe.get(getPosition()));
                     context.startActivity(intent);
 

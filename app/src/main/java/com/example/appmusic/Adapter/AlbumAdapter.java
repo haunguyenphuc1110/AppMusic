@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.appmusic.Activity.DanhSachBaiHatActivity;
+import com.example.appmusic.Activity.SongListActivity;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;
@@ -31,7 +31,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  = inflater.inflate(R.layout.row_album_hot,viewGroup, false);
+        View view  = inflater.inflate(R.layout.row_album_item,viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -59,7 +59,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder>{
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, DanhSachBaiHatActivity.class);
+                    Intent intent = new Intent(context, SongListActivity.class);
                     intent.putExtra("itemalbum", arrAlbum.get(getPosition()));
                     context.startActivity(intent);
                 }

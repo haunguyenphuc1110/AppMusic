@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.appmusic.R;
 
+//This fragment is on viewpager at MainActivity
 public class Fragment_Main_Page extends Fragment {
 
     View view;

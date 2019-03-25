@@ -6,11 +6,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
-public class ViewPagerPhatDanhSachNhac extends FragmentPagerAdapter {
+public class ViewPagerMusicListPlayer extends FragmentPagerAdapter {
 
     public final ArrayList<Fragment> arrFragment = new ArrayList<>();
 
-    public ViewPagerPhatDanhSachNhac(FragmentManager fm) {
+    public ViewPagerMusicListPlayer(FragmentManager fm) {
         super(fm);
     }
 

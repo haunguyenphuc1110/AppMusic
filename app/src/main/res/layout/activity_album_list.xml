@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DanhSachChuDeActivity">
+    tools:context=".Activity.AlbumListActivity">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbardanhsachchude"
+        android:id="@+id/toolbardanhsachalbum"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
@@ -15,8 +14,8 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewchude"
-        android:layout_below="@id/toolbardanhsachchude"
+        android:id="@+id/recyclerviewalbum"
+        android:layout_below="@id/toolbardanhsachalbum"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

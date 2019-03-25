@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+<!--The place where management list user's favourite song-->
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/txtbannerlogin"
+        android:text="Đăng nhập để tận hưởng trải nghiệm nghe nhạc tuyệt vời nhất"
+        android:textColor="@color/colorWhite"
+        android:maxLines="2"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:background="@drawable/custom_background_login_register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="100dp" />
 
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="THƯ VIỆN"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:textSize="26sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerviewmusiclibrary"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</ScrollView>
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txtlibrarynosong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Không có dữ liệu bài hát"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:visibility="gone" />
+
+</LinearLayout>

@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.appmusic.Adapter.DanhSachTheLoaiTheoChuDeAdapter;
+import com.example.appmusic.Adapter.CategoryListAdapter;
 import com.example.appmusic.Model.ChuDe;
 import com.example.appmusic.Model.TheLoai;
 import com.example.appmusic.R;
@@ -22,18 +22,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachTheLoaiTheoChuDeActivity extends AppCompatActivity {
+public class CategoryListActivity extends AppCompatActivity {
 
     ChuDe chuDe;
     Toolbar toolbarDanhSachTheLoaiTheoChuDe;
     RecyclerView recyclerViewDanhSachTheLoaiTheoChuDe;
     ArrayList<TheLoai> arrTheLoai;
-    DanhSachTheLoaiTheoChuDeAdapter danhSachTheLoaiTheoChuDeAdapter;
+    CategoryListAdapter categoryListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_the_loai_theo_chu_de);
+        setContentView(R.layout.activity_category_list);
         getIntentChuDe();
         addControls();
         init();
@@ -47,9 +47,9 @@ public class DanhSachTheLoaiTheoChuDeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
                 arrTheLoai = (ArrayList<TheLoai>) response.body();
-                danhSachTheLoaiTheoChuDeAdapter = new DanhSachTheLoaiTheoChuDeAdapter(DanhSachTheLoaiTheoChuDeActivity.this, arrTheLoai);
-                recyclerViewDanhSachTheLoaiTheoChuDe.setLayoutManager(new GridLayoutManager(DanhSachTheLoaiTheoChuDeActivity.this, 2));
-                recyclerViewDanhSachTheLoaiTheoChuDe.setAdapter(danhSachTheLoaiTheoChuDeAdapter);
+                categoryListAdapter = new CategoryListAdapter(CategoryListActivity.this, arrTheLoai);
+                recyclerViewDanhSachTheLoaiTheoChuDe.setLayoutManager(new GridLayoutManager(CategoryListActivity.this, 2));
+                recyclerViewDanhSachTheLoaiTheoChuDe.setAdapter(categoryListAdapter);
             }
 
             @Override

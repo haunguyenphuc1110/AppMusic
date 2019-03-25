@@ -87,15 +87,6 @@ public class Fragment_Login extends Fragment implements View.OnClickListener, Go
             case R.id.btnlogingoogle:
                 signIn();
                 break;
-
-        }
-    }
-
-    private void showProgressDialog(){
-        if (progressDialog == null){
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
         }
     }
 
@@ -122,5 +113,13 @@ public class Fragment_Login extends Fragment implements View.OnClickListener, Go
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+    private void showProgressDialog(){
+        if (progressDialog == null){
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }
     }
 }

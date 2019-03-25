@@ -29,7 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText txtSearch;
     ImageView imgBack;
     RecyclerView recyclerViewSearch;
-    TextView txtNoSong;
+    TextView txtNoSong;//Will display when no result is found
     SongSearchingAdapter songSearchingAdapter;
 
     @Override
@@ -59,7 +59,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-        //CLick event. After click, view move to Login Activity
+        //CLick event. After click, view will return to Login Activity
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,11 +83,12 @@ public class SearchActivity extends AppCompatActivity {
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 ArrayList<BaiHat> arrBaiHat = (ArrayList<BaiHat>) response.body();
 
-                if (arrBaiHat.size() > 0){
+                if (arrBaiHat.size() > 0){ //Check if has data
                     songSearchingAdapter = new SongSearchingAdapter(SearchActivity.this, arrBaiHat);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
                     recyclerViewSearch.setLayoutManager(linearLayoutManager);
                     recyclerViewSearch.setAdapter(songSearchingAdapter);
+
                     txtNoSong.setVisibility(View.GONE);
                     recyclerViewSearch.setVisibility(View.VISIBLE);
                 }

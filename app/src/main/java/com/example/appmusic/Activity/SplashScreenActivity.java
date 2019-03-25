@@ -1,5 +1,6 @@
 package com.example.appmusic.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 finish();
+
             }
-        },3000); //Delay 3 seconds
+        },2000); //Delay 3 seconds
     }
 }

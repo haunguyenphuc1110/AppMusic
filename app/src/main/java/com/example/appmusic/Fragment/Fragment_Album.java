@@ -10,10 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.appmusic.Activity.DanhSachAlbumActivity;
+import com.example.appmusic.Activity.AlbumListActivity;
 import com.example.appmusic.Adapter.AlbumAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.R;
@@ -48,7 +47,7 @@ public class Fragment_Album extends Fragment {
         txtMoreAlbum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DanhSachAlbumActivity.class));
+                startActivity(new Intent(getActivity(), AlbumListActivity.class));
             }
         });
     }

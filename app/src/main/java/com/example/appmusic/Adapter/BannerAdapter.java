@@ -8,9 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.example.appmusic.Activity.DanhSachBaiHatActivity;
+import com.example.appmusic.Activity.SongListActivity;
 import com.example.appmusic.Model.QuangCao;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;
@@ -57,14 +56,13 @@ public class BannerAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DanhSachBaiHatActivity.class);
-                intent.putExtra("banner", arrBanner.get(position));
-                context.startActivity(intent);
+            Intent intent = new Intent(context, SongListActivity.class);
+            intent.putExtra("banner", arrBanner.get(position));
+            context.startActivity(intent);
             }
         });
 
         container.addView(view);
-
         return view;
     }
 

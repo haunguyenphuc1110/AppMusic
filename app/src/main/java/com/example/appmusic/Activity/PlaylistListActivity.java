@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.appmusic.Adapter.DanhSachPlaylistAdapter;
+import com.example.appmusic.Adapter.PlaylistListAdapter;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -20,17 +20,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachPlaylistActivity extends AppCompatActivity {
+public class PlaylistListActivity extends AppCompatActivity {
 
     Toolbar toolbarDanhSachPlaylist;
     RecyclerView recyclerViewDanhSachPlaylist;
     ArrayList<Playlist> arrPlaylist;
-    DanhSachPlaylistAdapter danhSachPlaylistAdapter;
+    PlaylistListAdapter playlistListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_playlist);
+        setContentView(R.layout.activity_playlist_list);
         addControls();
         init();
         getData();
@@ -43,9 +43,9 @@ public class DanhSachPlaylistActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Playlist>> call, Response<List<Playlist>> response) {
                 arrPlaylist = (ArrayList<Playlist>) response.body();
-                danhSachPlaylistAdapter = new DanhSachPlaylistAdapter(DanhSachPlaylistActivity.this, arrPlaylist);
-                recyclerViewDanhSachPlaylist.setLayoutManager(new GridLayoutManager(DanhSachPlaylistActivity.this, 2));
-                recyclerViewDanhSachPlaylist.setAdapter(danhSachPlaylistAdapter);
+                playlistListAdapter = new PlaylistListAdapter(PlaylistListActivity.this, arrPlaylist);
+                recyclerViewDanhSachPlaylist.setLayoutManager(new GridLayoutManager(PlaylistListActivity.this, 2));
+                recyclerViewDanhSachPlaylist.setAdapter(playlistListAdapter);
             }
 
             @Override

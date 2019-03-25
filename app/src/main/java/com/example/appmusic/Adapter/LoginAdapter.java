@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.ArrayList;
 
+//This class controls fragments. In this case, Fragment Login is used
 public class LoginAdapter extends FragmentPagerAdapter {
 
     private ArrayList<Fragment> arrayFragment = new ArrayList<>();

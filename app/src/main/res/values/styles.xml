@@ -16,11 +16,5 @@
     <style name="capfalse" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
-    
-    <declare-styleable name="PasswordEditText">
-        
-        <attr name="useStrike" format="boolean"/>
-        
-    </declare-styleable>
 
 </resources>

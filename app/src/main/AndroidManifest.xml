@@ -12,28 +12,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ProfileManagementActivity"></activity>
+        <activity
+            android:name=".Activity.ProfileManagementActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".Activity.SearchActivity" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activity.MusicPlayerActivity"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activity.DanhSachAlbumActivity"
+            android:name=".Activity.AlbumListActivity"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activity.DanhSachTheLoaiTheoChuDeActivity"
+            android:name=".Activity.CategoryListActivity"
             android:screenOrientation="portrait" />
+
         <activity
-            android:name=".Activity.DanhSachChuDeActivity"
+            android:name=".Activity.ThemeListActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activity.SplashScreenActivity"
             android:theme="@style/SplashTheme">
@@ -43,12 +53,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".Activity.DanhSachPlaylistActivity"
+            android:name=".Activity.PlaylistListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.DanhSachBaiHatActivity"
+            android:name=".Activity.SongListActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".Activity.MainActivity"
             android:screenOrientation="portrait" />

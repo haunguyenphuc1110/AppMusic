@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.appmusic.Adapter.DanhSachAlbumAdapter;
+import com.example.appmusic.Adapter.AlbumListAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -20,16 +20,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachAlbumActivity extends AppCompatActivity {
+public class AlbumListActivity extends AppCompatActivity {
 
     Toolbar toolbarDanhSachAlbum;
     RecyclerView recyclerViewDanhSachAlbum;
     ArrayList<Album> arrAlbum;
-    DanhSachAlbumAdapter danhSachAlbumAdapter;
+    AlbumListAdapter albumListAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_album);
+        setContentView(R.layout.activity_album_list);
         addControls();
         init();
         getData();
@@ -42,9 +42,9 @@ public class DanhSachAlbumActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Album>> call, Response<List<Album>> response) {
                 arrAlbum = (ArrayList<Album>) response.body();
-                danhSachAlbumAdapter = new DanhSachAlbumAdapter(DanhSachAlbumActivity.this, arrAlbum);
-                recyclerViewDanhSachAlbum.setLayoutManager(new GridLayoutManager(DanhSachAlbumActivity.this, 2));
-                recyclerViewDanhSachAlbum.setAdapter(danhSachAlbumAdapter);
+                albumListAdapter = new AlbumListAdapter(AlbumListActivity.this, arrAlbum);
+                recyclerViewDanhSachAlbum.setLayoutManager(new GridLayoutManager(AlbumListActivity.this, 2));
+                recyclerViewDanhSachAlbum.setAdapter(albumListAdapter);
             }
 
             @Override

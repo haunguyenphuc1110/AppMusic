@@ -35,7 +35,7 @@ public class Fragment_Music_Disc extends Fragment {
         return view;
     }
 
-    public void playNhac(String hinhanh){
+    public void setImage(String hinhanh){
         Picasso.with(getContext()).load(hinhanh).into(circleImageView);
     }
 

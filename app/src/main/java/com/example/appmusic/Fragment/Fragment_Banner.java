@@ -1,5 +1,6 @@
 package com.example.appmusic.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -36,8 +37,10 @@ public class Fragment_Banner extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_banner, container,false);
+
         addControls();
         getData();
+
         return view;
     }
 

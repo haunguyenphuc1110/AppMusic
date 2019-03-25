@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,7 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.appmusic.Adapter.DanhSachBaiHatAdapter;
+import com.example.appmusic.Adapter.SongListAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.Model.Playlist;
@@ -41,15 +40,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachBaiHatActivity extends AppCompatActivity {
+public class SongListActivity extends AppCompatActivity {
 
-    CoordinatorLayout coordinatorLayout;
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     RecyclerView recyclerViewDanhSachBaiHat;
     FloatingActionButton floatingActionButton;
     ImageView imgDanhSachCaKhuc;
-    DanhSachBaiHatAdapter danhSachBaiHatAdapter;
+    SongListAdapter songListAdapter;
     ArrayList<BaiHat> arrBaiHat;
     QuangCao quangCao;
     Playlist playlist;
@@ -60,12 +58,12 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_bai_hat);
+        setContentView(R.layout.activity_song_list);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //Get data from Banner, playlist, album, concept to DanhSachBaiHatActivity
+        //Get data from Banner, playlist, album, concept to SongListActivity
         getData();
 
         //Anh Xa cac thanh phan trong layout
@@ -78,7 +76,6 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         if(quangCao != null && !quangCao.getTenBaiHat().equals("")){
             setValueInView(quangCao.getTenBaiHat(), quangCao.getHinhBaiHat());
             getDataQuangCao(quangCao.getIdQuangCao());
-            addEvents();
         }
 
         //Kiem tra playlist co ton tai
@@ -108,9 +105,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 arrBaiHat = (ArrayList<BaiHat>) response.body();
-                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, arrBaiHat );
-                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
-                recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
                 addEvents();
             }
 
@@ -128,9 +125,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 arrBaiHat = (ArrayList<BaiHat>) response.body();
-                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, arrBaiHat );
-                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
-                recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
                 addEvents();
             }
 
@@ -148,9 +145,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 arrBaiHat = (ArrayList<BaiHat>) response.body();
-                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, arrBaiHat );
-                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
-                recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
                 addEvents();
             }
 
@@ -168,9 +165,9 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
                 arrBaiHat = (ArrayList<BaiHat>) response.body();
-                danhSachBaiHatAdapter = new DanhSachBaiHatAdapter(DanhSachBaiHatActivity.this, arrBaiHat );
-                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(DanhSachBaiHatActivity.this));
-                recyclerViewDanhSachBaiHat.setAdapter(danhSachBaiHatAdapter);
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
                 addEvents();
             }
 
@@ -210,13 +207,14 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
+
         floatingActionButton.setEnabled(false);
     }
 
     private void addControls() {
-        coordinatorLayout = findViewById(R.id.coordinatorlayout);
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
         toolbar = findViewById(R.id.toolbardanhsach);
         recyclerViewDanhSachBaiHat = findViewById(R.id.recyclerviewdanhsachbaihat);
@@ -247,8 +245,8 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProgressDialog(DanhSachBaiHatActivity.this);
-                Intent intent = new Intent(DanhSachBaiHatActivity.this, MusicPlayerActivity.class);
+                showProgressDialog(SongListActivity.this);
+                Intent intent = new Intent(SongListActivity.this, MusicPlayerActivity.class);
                 intent.putExtra("danhsachcakhuc", arrBaiHat);
                 startActivity(intent);
             }
@@ -263,14 +261,17 @@ public class DanhSachBaiHatActivity extends AppCompatActivity {
     }
 
     private void showProgressDialog(Context context){
-        if(progressDialog != null) {
+        if (progressDialog == null){
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
+        }else{
             progressDialog.dismiss();
             progressDialog = null;
         }
-        progressDialog = ProgressDialog.show(context, "", "Please wait...");
     }
 
-    public void hideProgressDialog() {
+    private void hideProgressDialog() {
         if(progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;

@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.appmusic.Activity.DanhSachBaiHatActivity;
-import com.example.appmusic.Activity.DanhSachChuDeActivity;
-import com.example.appmusic.Activity.DanhSachTheLoaiTheoChuDeActivity;
+import com.example.appmusic.Activity.SongListActivity;
+import com.example.appmusic.Activity.ThemeListActivity;
+import com.example.appmusic.Activity.CategoryListActivity;
 import com.example.appmusic.Model.ChuDe;
 import com.example.appmusic.Model.ChuDeTheLoai;
 import com.example.appmusic.Model.TheLoai;
@@ -27,13 +26,12 @@ import com.example.appmusic.Service.DataService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_ChuDe_TheLoai extends Fragment {
+public class Fragment_Theme_Category extends Fragment {
 
     View view;
     HorizontalScrollView horizontalScrollView;
@@ -42,13 +40,13 @@ public class Fragment_ChuDe_TheLoai extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_chude_theloai, container ,false);
+        view = inflater.inflate(R.layout.fragment_theme_category, container ,false);
         horizontalScrollView = view.findViewById(R.id.horizontalScrollview);
         txtMoreChuDeTheLoai = view.findViewById(R.id.txtxemthemchudetheloai);
         txtMoreChuDeTheLoai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), DanhSachChuDeActivity.class));
+                startActivity(new Intent(getActivity(), ThemeListActivity.class));
             }
         });
         getData();
@@ -72,8 +70,8 @@ public class Fragment_ChuDe_TheLoai extends Fragment {
                 LinearLayout linearLayout = new LinearLayout(getActivity());
                 linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-                LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(600,300);
-                layout.setMargins(10,20,10,30);
+                LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(600,400);
+                layout.setMargins(10,20,10,10);
 
                 //For Chu De
                 for (int i = 0 ; i < arrChuDe.size() ; i++){
@@ -92,7 +90,7 @@ public class Fragment_ChuDe_TheLoai extends Fragment {
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getActivity(), DanhSachTheLoaiTheoChuDeActivity.class);
+                            Intent intent = new Intent(getActivity(), CategoryListActivity.class);
                             intent.putExtra("chude", arrChuDe.get(finalI));
                             startActivity(intent);
                         }
@@ -116,7 +114,7 @@ public class Fragment_ChuDe_TheLoai extends Fragment {
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent intent = new Intent(getActivity(), DanhSachBaiHatActivity.class);
+                            Intent intent = new Intent(getActivity(), SongListActivity.class);
                             intent.putExtra("idtheloai", arrTheLoai.get(finalI));
                             startActivity(intent);
                         }

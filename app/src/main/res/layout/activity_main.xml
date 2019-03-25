@@ -28,11 +28,21 @@
             android:text="Tìm kiếm bài hát, playlist,..."
             android:gravity="center_vertical"
             android:textAllCaps="false"
-            android:background="@color/colorWhite"
             android:layout_margin="10dp"
             android:textStyle="normal"
-            android:textColor="#949090"
-            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:textColor="#909090"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/imgrefresh"
+            android:src="@drawable/ic_refresh"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
             android:layout_height="wrap_content" />
 
     </LinearLayout>

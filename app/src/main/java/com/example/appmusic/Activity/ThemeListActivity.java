@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.example.appmusic.Adapter.DanhSachChuDeAdapter;
+import com.example.appmusic.Adapter.ThemeListAdapter;
 import com.example.appmusic.Model.ChuDe;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
@@ -20,17 +20,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DanhSachChuDeActivity extends AppCompatActivity {
+public class ThemeListActivity extends AppCompatActivity {
 
     Toolbar toolbarDanhSachChuDe;
     RecyclerView recyclerViewDanhSachChuDe;
     ArrayList<ChuDe> arrChuDe;
-    DanhSachChuDeAdapter danhSachChuDeAdapter;
+    ThemeListAdapter themeListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_danh_sach_chu_de);
+        setContentView(R.layout.activity_theme_list);
         addControls();
         init();
         getData();
@@ -43,9 +43,9 @@ public class DanhSachChuDeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
                 arrChuDe = (ArrayList<ChuDe>) response.body();
-                danhSachChuDeAdapter = new DanhSachChuDeAdapter(DanhSachChuDeActivity.this, arrChuDe);
-                recyclerViewDanhSachChuDe.setLayoutManager(new GridLayoutManager(DanhSachChuDeActivity.this, 1));
-                recyclerViewDanhSachChuDe.setAdapter(danhSachChuDeAdapter);
+                themeListAdapter = new ThemeListAdapter(ThemeListActivity.this, arrChuDe);
+                recyclerViewDanhSachChuDe.setLayoutManager(new GridLayoutManager(ThemeListActivity.this, 1));
+                recyclerViewDanhSachChuDe.setAdapter(themeListAdapter);
             }
 
             @Override

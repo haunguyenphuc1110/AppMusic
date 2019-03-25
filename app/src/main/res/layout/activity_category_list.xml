@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.DanhSachAlbumActivity">
+    tools:context=".Activity.CategoryListActivity">
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbardanhsachalbum"
+        android:id="@+id/toolbardanhsachtheloaitheochude"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
@@ -14,8 +15,8 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewalbum"
-        android:layout_below="@id/toolbardanhsachalbum"
+        android:id="@+id/recyclerviewtheloaitheochude"
+        android:layout_below="@id/toolbardanhsachtheloaitheochude"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
