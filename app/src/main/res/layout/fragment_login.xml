@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:paddingRight="40dp"
-            android:drawableLeft="@drawable/ic_google_plus"
+            android:drawableLeft="@drawable/ic_google"
             android:textColor="@color/colorWhite"
             android:background="@drawable/border_google"
             android:text="Google" />
