@@ -38,6 +38,23 @@ Just install Android Studio. You can download from url: https://developer.androi
 Check your internet beacause php files are upload on host free so sometimes it's slow
 After that run it and enjoy
 
+## Screenshots
+
+Some screenshots describe overview of my app and then you can understand what i have done.
+
+<p float="left">
+  <img src="Screenshots/Screenshot_2019-03-31-13-19-40-502_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-19-05-256_com.example.appmusic.png" width="250" /> 
+  <img src="Screenshots/Screenshot_2019-03-31-22-20-52-126_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-22-13-025_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-22-37-485_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-23-05-148_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-23-30-002_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-23-58-837_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-24-36-090_com.example.appmusic.png" width="250" />
+  <img src="Screenshots/Screenshot_2019-03-31-22-25-27-874_com.example.appmusic.png" width="250" />
+</p>
+
 ## Authors
 
 * **Hau Nguyen Phuc**
