@@ -73,23 +73,27 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                imgLuotThich.setImageResource(R.drawable.ic_loved);
-                DataService dataService = APIService.getService();
-                Call<String> callback =dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
-                callback.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String result = response.body();
-                        if (result.equals("Success"))
-                            Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                    }
+                    if (MainActivity.profile.getId() == null)//Check if user logged in or not
+                        Toast.makeText(context,"Bạn chưa đăng nhập để thích bài hát này", Toast.LENGTH_SHORT).show();
+                    else {
+                        imgLuotThich.setImageResource(R.drawable.ic_loved);
+                        DataService dataService = APIService.getService();
+                        Call<String> callback = dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
+                        callback.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                String result = response.body();
+                                if (result.equals("Success"))
+                                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                            }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
 
+                            }
+                        });
+                        imgLuotThich.setEnabled(false);
                     }
-                });
-                imgLuotThich.setEnabled(false);
                 }
             });
 
@@ -98,8 +102,10 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
                 public void onClick(View view) {
                     if (MainActivity.profile.getId() == null)//Check if user logged in or not
                         Toast.makeText(context,"Bạn chưa đăng nhập để thêm bài hát này", Toast.LENGTH_SHORT).show();
-                    else
+                    else {
                         addFavoritePlaylist(MainActivity.profile.getId(), arrBaiHat.get(getPosition()).getIdBaiHat());
+                        notifyDataSetChanged();
+                    }
                 }
             });
 

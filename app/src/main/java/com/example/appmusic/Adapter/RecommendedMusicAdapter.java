@@ -70,14 +70,14 @@ public class RecommendedMusicAdapter extends RecyclerView.Adapter<RecommendedMus
             txtTenCaSi = itemView.findViewById(R.id.txttencasibathathot);
             imgHinhBaiHat = itemView.findViewById(R.id.imgbaihathot);
             imgLuotThich = itemView.findViewById(R.id.imgluotthich);
-            imgAddPlaylist = itemView.findViewById(R.id.imgplaylistadd);
+            imgAddPlaylist = itemView.findViewById(R.id.imgplaylistaddrecommend);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, MusicPlayerActivity.class);
-                    intent.putExtra("cakhuc", arrBaiHat.get(getPosition()));
-                    context.startActivity(intent);
+                Intent intent = new Intent(context, MusicPlayerActivity.class);
+                intent.putExtra("cakhuc", arrBaiHat.get(getPosition()));
+                context.startActivity(intent);
                 }
             });
 
@@ -85,23 +85,27 @@ public class RecommendedMusicAdapter extends RecyclerView.Adapter<RecommendedMus
             imgLuotThich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                imgLuotThich.setImageResource(R.drawable.ic_loved);
-                DataService dataService = APIService.getService();
-                Call<String> callback =dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
-                callback.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        String result = response.body();
-                        if (result.equals("Success"))
-                            Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
-                    }
+                    if (MainActivity.profile.getId() == null)//Check if user logged in or not
+                        Toast.makeText(context,"Bạn chưa đăng nhập để thích bài hát này", Toast.LENGTH_SHORT).show();
+                    else {
+                        imgLuotThich.setImageResource(R.drawable.ic_loved);
+                        DataService dataService = APIService.getService();
+                        Call<String> callback = dataService.updateLuotThich("1", arrBaiHat.get(getPosition()).getIdBaiHat());
+                        callback.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                String result = response.body();
+                                if (result.equals("Success"))
+                                    Toast.makeText(context, "Đã Thích", Toast.LENGTH_SHORT).show();
+                            }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
 
+                            }
+                        });
+                        imgLuotThich.setEnabled(false);
                     }
-                });
-                imgLuotThich.setEnabled(false);
                 }
             });
 
@@ -110,8 +114,10 @@ public class RecommendedMusicAdapter extends RecyclerView.Adapter<RecommendedMus
                 public void onClick(View view) {
                     if (MainActivity.profile.getId() == null)//Check if user logged in or not
                         Toast.makeText(context,"Bạn chưa đăng nhập để thêm bài hát này", Toast.LENGTH_SHORT).show();
-                    else
-                        addFavoritePlaylist(MainActivity.profile.getId(),arrBaiHat.get(getPosition()).getIdBaiHat());
+                    else {
+                        addFavoritePlaylist(MainActivity.profile.getId(), arrBaiHat.get(getPosition()).getIdBaiHat());
+                        notifyDataSetChanged();
+                    }
                 }
             });
 

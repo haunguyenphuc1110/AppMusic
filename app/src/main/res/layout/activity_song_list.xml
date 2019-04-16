@@ -44,7 +44,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-
+<!--
     <android.support.design.widget.FloatingActionButton
         android:backgroundTint="#A845DE"
         android:src="@drawable/ic_floating_action_button"
@@ -56,6 +56,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+-->
+    <Button
+        android:id="@+id/btnplayall"
+        android:text="NGHE TẤT CẢ"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_width="200dp"
+        android:background="@drawable/border_button_play_list_song"
+        android:layout_height="wrap_content"
+        app:layout_anchorGravity="bottom|center"
+        app:layout_anchor="@id/appbarlayout"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

@@ -17,6 +17,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.appmusic.Adapter.SongListAdapter;
@@ -45,7 +46,7 @@ public class SongListActivity extends AppCompatActivity {
     CollapsingToolbarLayout collapsingToolbarLayout;
     Toolbar toolbar;
     RecyclerView recyclerViewDanhSachBaiHat;
-    FloatingActionButton floatingActionButton;
+    Button actionButton;
     ImageView imgDanhSachCaKhuc;
     SongListAdapter songListAdapter;
     ArrayList<BaiHat> arrBaiHat;
@@ -63,14 +64,14 @@ public class SongListActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        //Get data from Banner, playlist, album, concept to SongListActivity
-        getData();
-
         //Anh Xa cac thanh phan trong layout
         addControls();
 
         //Initial
         init();
+
+        //Get data from Banner, playlist, album, concept to SongListActivity
+        getData();
 
         //Kiem tra quang cao co ton tai
         if(quangCao != null && !quangCao.getTenBaiHat().equals("")){
@@ -80,7 +81,7 @@ public class SongListActivity extends AppCompatActivity {
 
         //Kiem tra playlist co ton tai
         if(playlist != null && !playlist.getTen().equals("")){
-            setValueInView(playlist.getTen(), playlist.getHinhPlaylist());
+            setValueInView(playlist.getTen(), playlist.getHinhIcon());
             getDataPlaylist(playlist.getIdPlaylist());
         }
 
@@ -210,15 +211,13 @@ public class SongListActivity extends AppCompatActivity {
 
         collapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-
-        floatingActionButton.setEnabled(false);
     }
 
     private void addControls() {
         collapsingToolbarLayout = findViewById(R.id.collapsingtoolbar);
         toolbar = findViewById(R.id.toolbardanhsach);
         recyclerViewDanhSachBaiHat = findViewById(R.id.recyclerviewdanhsachbaihat);
-        floatingActionButton = findViewById(R.id.floatingactionbutton);
+        actionButton = findViewById(R.id.btnplayall);
         imgDanhSachCaKhuc = findViewById(R.id.imgdanhsachcakhuc);
     }
 
@@ -241,8 +240,7 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     private void addEvents(){
-        floatingActionButton.setEnabled(true);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showProgressDialog(SongListActivity.this);

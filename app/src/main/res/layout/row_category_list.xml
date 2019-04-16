@@ -17,6 +17,7 @@
 
             <ImageView
                 android:id="@+id/imgtheloaitheochude"
+                android:background="@drawable/custom_background_banner"
                 android:scaleType="centerCrop"
                 android:layout_width="180dp"
                 android:layout_height="180dp" />

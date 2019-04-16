@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.URL;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,11 +48,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     TabLayout tabLayout;
     ViewPager viewPager;
-    ImageView imgAccount, imgRefresh;
+    ImageView imgRefresh;
+    CircleImageView imgAccount;
+    MainViewPagerAdapter mainViewPagerAdapter;
     Button btnSearch;
     String link_pic;//Link picture profile
 
-    AccessToken accessToken;//If Logged then not null. It's like login state
+    public static AccessToken accessToken;//If Logged then not null. It's like login state
 
     LoginModel loginModel;//Model that has some function used for login
 
@@ -69,10 +72,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         addControls();
-        init();
+
         getFacebookProfile();
 
         getGoogleProfile();
+
+        if (accessToken == null && googleSignInResult == null)
+            init();
 
         addEvents();
     }
@@ -90,21 +96,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 if (accessToken == null && googleSignInResult == null) {
                     showProgressDialog();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    finish();
                 }
                 else if (accessToken != null && googleSignInResult == null) {
                     showProgressDialog();
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("facebook", profile);
                     startActivity(intent);
-                    finish();
                 }
                 else if (accessToken == null && googleSignInResult != null){
                     showProgressDialog();
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("google", profile);
                     startActivity(intent);
-                    finish();
                 }
             }
         });
@@ -131,19 +134,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         imgAccount = findViewById(R.id.imgaccount);
         btnSearch = findViewById(R.id.btnsearch);
         imgRefresh = findViewById(R.id.imgrefresh);
-    }
-
-    private void init() {
-        //Set up adapter
-        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        mainViewPagerAdapter.addFragment(new Fragment_Main_Page(), "Trang chủ");
-        mainViewPagerAdapter.addFragment(new Fragment_Music_Library(), "Cá nhân");
-        viewPager.setAdapter(mainViewPagerAdapter);
-
-        //Set up Tab Layout
-        tabLayout.setupWithViewPager(viewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_music_library);
 
         //Init Login Model
         loginModel = new LoginModel();
@@ -154,6 +144,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         intent = getIntent();
     }
 
+    private void init() {
+        //Set up adapter
+        mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        mainViewPagerAdapter.addFragment(new Fragment_Main_Page(), "Trang chủ");
+        mainViewPagerAdapter.addFragment(new Fragment_Music_Library(), "Cá nhân");
+        viewPager.setAdapter(mainViewPagerAdapter);
+
+        //Set up Tab Layout
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_music_library);
+    }
+
     private void getFacebookProfile(){
         accessToken = loginModel.getCurrentFacebookToken();
         if(accessToken != null) {
@@ -161,9 +164,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 @Override
                 public void onCompleted(JSONObject object, GraphResponse response) {
                     try {
-                        link_pic = object.getJSONObject("picture").getJSONObject("data").getString("url");
-
                         profile.setId(object.getString("id"));
+                        link_pic = object.getJSONObject("picture").getJSONObject("data").getString("url");
                         profile.setName(object.getString("name"));
                         profile.setAvatar(link_pic);
                         profile.setEmail("");
@@ -173,9 +175,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         new PictureProfile().execute(link_pic);//Set avatar
 
                         Toast.makeText(MainActivity.this,profile.getName() + " đã đăng nhập thành công", Toast.LENGTH_SHORT).show();
+
+                        init();
                     }catch(Exception e) {
                         e.printStackTrace();
                     }
+
                 }
             });
 
@@ -211,8 +216,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 insertUser();//Insert user into database if it is not exist
 
                 new PictureProfile().execute(link_pic);//Set avatar
+                Toast.makeText(MainActivity.this, profile.getName() + " đã đăng nhập thành công", Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(this, profile.getName() + " đã đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                init();
             }
         }
     }

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imglibraryhinhbaihat"
+        android:background="@drawable/custom_background_banner"
         android:layout_margin ="4dp"
         android:scaleType="fitXY"
         android:layout_width="100dp"

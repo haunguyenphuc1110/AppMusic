@@ -44,7 +44,7 @@ public class ThemeListActivity extends AppCompatActivity {
             public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
                 arrChuDe = (ArrayList<ChuDe>) response.body();
                 themeListAdapter = new ThemeListAdapter(ThemeListActivity.this, arrChuDe);
-                recyclerViewDanhSachChuDe.setLayoutManager(new GridLayoutManager(ThemeListActivity.this, 1));
+                recyclerViewDanhSachChuDe.setLayoutManager(new GridLayoutManager(ThemeListActivity.this, 2));
                 recyclerViewDanhSachChuDe.setAdapter(themeListAdapter);
             }
 

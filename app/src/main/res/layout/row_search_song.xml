@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imgsearchhinhbaihat"
+            android:background="@drawable/custom_background_banner"
             android:layout_margin ="4dp"
             android:scaleType="fitXY"
             android:layout_width="100dp"
@@ -57,7 +58,7 @@
             android:layout_weight="1"
             android:layout_toLeftOf="@id/imgluotthich"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_playlist_add" />
+            android:src="@drawable/ic_playlist_add_black" />
 
         <ImageView
             android:id="@+id/imgsearchluotthich"

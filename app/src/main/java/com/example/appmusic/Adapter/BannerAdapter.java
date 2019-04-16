@@ -37,7 +37,6 @@ public class BannerAdapter extends PagerAdapter {
         return view == o;
     }
 
-
     //Custom object
     @NonNull
     @Override

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/imgbaihathot"
+        android:background="@drawable/custom_background_banner"
         android:layout_margin ="4dp"
         android:scaleType="fitXY"
         android:layout_width="100dp"
@@ -30,7 +31,7 @@
             android:text="Chạy ngay đi"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="#000000"/>
+            android:textColor="#FFFFFF"/>
         <TextView
             android:id="@+id/txttencasibathathot"
             android:layout_toRightOf="@id/imgbaihathot"
@@ -41,15 +42,16 @@
             android:layout_marginTop="7dp"
             android:ellipsize="end"
             android:singleLine="true"
+            android:textStyle="bold"
             android:maxWidth="150dp"
             android:text="Sơn Tùng M-TP"
             android:textSize="16sp"
-            android:textColor="#000000"/>
+            android:textColor="#585454"/>
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imgplaylistadd"
+        android:id="@+id/imgplaylistaddrecommend"
         android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
@@ -57,7 +59,7 @@
         android:layout_weight="1"
         android:layout_toLeftOf="@id/imgluotthich"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_playlist_add" />
+        android:src="@drawable/ic_playlist_add_white" />
 
     <ImageView
         android:id="@+id/imgluotthich"
@@ -67,5 +69,5 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="10dp"
         android:layout_weight="1"
-        android:src="@drawable/ic_love" />
+        android:src="@drawable/ic_love_white" />
 </LinearLayout>

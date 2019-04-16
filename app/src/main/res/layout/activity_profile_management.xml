@@ -132,7 +132,7 @@
                 android:id="@+id/btnlogout"
                 android:text="ĐĂNG XUẤT"
                 android:textColor="@color/colorWhite"
-                android:background="@drawable/custom_background_login_register"
+                android:background="@drawable/custom_background_chart"
                 android:layout_gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

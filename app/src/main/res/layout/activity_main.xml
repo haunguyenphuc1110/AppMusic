@@ -13,12 +13,13 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgaccount"
             android:src="@drawable/ic_avatar"
             android:layout_width="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="10dp"
+            android:background="@drawable/bgsearch"
             android:scaleType="centerCrop"
             android:layout_height="wrap_content" />
 

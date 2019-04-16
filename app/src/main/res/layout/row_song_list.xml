@@ -49,7 +49,7 @@
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/imgluotthichdanhsachbaihat"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_playlist_add" />
+            android:src="@drawable/ic_playlist_add_black" />
 
         <ImageView
             android:id="@+id/imgluotthichdanhsachbaihat"
