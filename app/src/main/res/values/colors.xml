@@ -7,8 +7,9 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="bgToolbar">#23638A</color>
     <color name="bgLogin">#3D9335</color>
-    <color name="colorGray">#CCC</color>
+    <color name="colorGray">#C0C0C0</color>
     <color name="colorFacebook">#4A6AE9</color>
     <color name="colorGoogle">#0057e7</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorPurple">#961357</color>
 </resources>

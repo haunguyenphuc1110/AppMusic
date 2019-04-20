@@ -1,13 +1,18 @@
 package com.example.appmusic.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.appmusic.Activity.MusicPlayerActivity;
+import com.example.appmusic.Interface.RecyclerViewClickListenerInterface;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;
 
@@ -16,10 +21,12 @@ import java.util.ArrayList;
 public class PlayingListAdapter extends RecyclerView.Adapter<PlayingListAdapter.ViewHolder>{
     Context context;
     ArrayList<BaiHat> arrBaiHat;
+    static RecyclerViewClickListenerInterface itemListener;
 
-    public PlayingListAdapter(Context context, ArrayList<BaiHat> arrBaiHat) {
+    public PlayingListAdapter(Context context, ArrayList<BaiHat> arrBaiHat, RecyclerViewClickListenerInterface itemListener) {
         this.context = context;
         this.arrBaiHat = arrBaiHat;
+        this.itemListener = itemListener;
     }
 
     @NonNull
@@ -43,13 +50,19 @@ public class PlayingListAdapter extends RecyclerView.Adapter<PlayingListAdapter.
         return arrBaiHat.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView txtIndex, txtTenBaiHat, txtCaSi;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtIndex = itemView.findViewById(R.id.txtphatnhacindex);
             txtTenBaiHat = itemView.findViewById(R.id.txttenbaihatduocphat);
             txtCaSi = itemView.findViewById(R.id.txttencasibaihat);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            itemListener.recyclerViewListClicked(view, this.getPosition());
         }
     }
 }

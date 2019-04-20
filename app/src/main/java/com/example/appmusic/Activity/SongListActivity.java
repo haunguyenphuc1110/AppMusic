@@ -1,5 +1,6 @@
 package com.example.appmusic.Activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.appmusic.Adapter.SongListAdapter;
 import com.example.appmusic.Model.Album;
@@ -37,6 +39,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import dmax.dialog.SpotsDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,13 +57,14 @@ public class SongListActivity extends AppCompatActivity {
     Playlist playlist;
     TheLoai theLoai;
     Album album;
-    ProgressDialog progressDialog;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_song_list);
 
+        //Kiểm tra tín hiệu mạng
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -243,10 +247,12 @@ public class SongListActivity extends AppCompatActivity {
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showProgressDialog(SongListActivity.this);
-                Intent intent = new Intent(SongListActivity.this, MusicPlayerActivity.class);
-                intent.putExtra("danhsachcakhuc", arrBaiHat);
-                startActivity(intent);
+                if (arrBaiHat.size() > 0) {
+                    showProgressDialog(SongListActivity.this);
+                    Intent intent = new Intent(SongListActivity.this, MusicPlayerActivity.class);
+                    intent.putExtra("danhsachcakhuc", arrBaiHat);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -259,20 +265,14 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     private void showProgressDialog(Context context){
-        if (progressDialog == null){
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
-        }else{
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
+        dialog = new SpotsDialog.Builder().setContext(context).setMessage("...").setCancelable(false).build();
+        dialog.show();
     }
 
     private void hideProgressDialog() {
-        if(progressDialog != null) {
-            progressDialog.dismiss();
-            progressDialog = null;
+        if(dialog != null) {
+            dialog.dismiss();
+            dialog = null;
         }
     }
 }

@@ -12,10 +12,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appmusic.Adapter.ViewPagerMusicListPlayer;
 import com.example.appmusic.Fragment.Fragment_Music_Disc;
@@ -29,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MusicPlayerActivity extends AppCompatActivity {
+public class MusicPlayerActivity extends AppCompatActivity implements Fragment_Playing_List.OnDataPass {
 
     Toolbar toolBarPhatNhac;
     SeekBar skTime;
@@ -44,7 +46,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
 
-    int position = 0;
+    public static int position = 0;
 
     boolean isRepeat = false;
     boolean isRandom = false;
@@ -59,8 +61,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
 
-
-        //Kiem tra tin hieu mang
+        //Check signal network
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
@@ -69,8 +70,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         addControls();
 
         addEvents();
-
-        new InitView().execute();
     }
 
     @Override
@@ -86,15 +85,19 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onPause() //Stop song when press Back Button on SmartPhone
-    {
-        if (mediaPlayer != null) {
-            mediaPlayer.pause();
-            mediaPlayer.stop();
-            arrBaiHatCommon.clear();
-        }
-        finish();
+    protected void onPause() {
         super.onPause();
+        if (mediaPlayer.isPlaying() && mediaPlayer != null) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null) {
+            mediaPlayer.start();
+        }
     }
 
     private void addEvents() {
@@ -102,27 +105,29 @@ public class MusicPlayerActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-            if (viewPagerMusicListPlayer.getItem(1) != null) {
-                if (arrBaiHatCommon.size() > 0) {
-                    fragment_music_disc.setImage(arrBaiHatCommon.get(0).getHinhBaiHat());
-                    handler.removeCallbacks(this);
-                } else {
-                    handler.postDelayed(this, 300);
+                if (viewPagerMusicListPlayer.getItem(1) != null) {
+                    if (arrBaiHatCommon.size() > 0) {
+                        fragment_music_disc.setImage(arrBaiHatCommon.get(0).getHinhBaiHat());
+                        handler.removeCallbacks(this);
+                    } else {
+                        handler.postDelayed(this, 300);
+                    }
                 }
-            }
             }
         }, 500);
 
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (mediaPlayer.isPlaying()) {
-                mediaPlayer.pause();
-                imgPlay.setImageResource(R.drawable.ic_play);
-            } else {
-                mediaPlayer.start();
-                imgPlay.setImageResource(R.drawable.ic_pause);
-            }
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    imgPlay.setImageResource(R.drawable.ic_play);
+                    fragment_music_disc.pauseDisc();
+                } else {
+                    mediaPlayer.start();
+                    imgPlay.setImageResource(R.drawable.ic_pause);
+                    fragment_music_disc.playDisc();
+                }
             }
         });
 
@@ -186,104 +191,100 @@ public class MusicPlayerActivity extends AppCompatActivity {
         imgNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (arrBaiHatCommon.size() > 0) {
-                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                }
-                if (position < arrBaiHatCommon.size()) {
-                    imgPlay.setImageResource(R.drawable.ic_pause);
-                    position++;
-                    if (isRepeat == true) {
-                        if (position == 0) {
-                            position = arrBaiHatCommon.size();
+                if (arrBaiHatCommon.size() > 0) {
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
+                    }
+                    if (position < arrBaiHatCommon.size()) {
+                        imgPlay.setImageResource(R.drawable.ic_pause);
+                        position++;
+                        if (isRepeat == true) {
+                            if (position == 0) {
+                                position = arrBaiHatCommon.size();
+                            }
+                            position --;
                         }
-                        position -= 1;
-                    }
-                    if (isRandom == true) {
-                        Random random = new Random();
-                        int index = random.nextInt(arrBaiHatCommon.size());
-                        if (index == position) {
-                            position = index - 1;
+                        if (isRandom == true) {
+                            int index = new Random().nextInt(arrBaiHatCommon.size());
+                            if (index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
                         }
-                        position = index;
+                        if (position > (arrBaiHatCommon.size() - 1)) {
+                            position = 0;
+                        }
+                        new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
+                        fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
+                        updateTimeSong();
                     }
-                    if (position > (arrBaiHatCommon.size() - 1)) {
-                        position = 0;
+                }
+                //Void clicking continuously by user
+                imgPrevious.setClickable(false);
+                imgNext.setClickable(false);
+                //Delay 5 second and after that allow user continue to click
+                Handler handlerImgNext = new Handler();
+                handlerImgNext.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgPrevious.setClickable(true);
+                        imgNext.setClickable(true);
                     }
-                    new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                    fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
-                    getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
-                    updateTimeSong();
-                }
-            }
-            imgPrevious.setClickable(false);
-            imgNext.setClickable(false);
-            Handler handler1 = new Handler();
-            handler1.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imgPrevious.setClickable(true);
-                    imgNext.setClickable(true);
-                }
-            }, 5000);
+                }, 5000);
             }
         });
 
         imgPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            if (arrBaiHatCommon.size() > 0) {
-                if (mediaPlayer.isPlaying() || mediaPlayer != null) {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                    mediaPlayer = null;
-                }
-                if (position < arrBaiHatCommon.size()) {
-                    imgPlay.setImageResource(R.drawable.ic_pause);
-                    position--;
-
-                    if (position < 0) {
-                        position = arrBaiHatCommon.size() - 1;
+                if (arrBaiHatCommon.size() > 0) {
+                    if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                        mediaPlayer.stop();
+                        mediaPlayer.release();
+                        mediaPlayer = null;
                     }
+                    if (position < arrBaiHatCommon.size()) {
+                        imgPlay.setImageResource(R.drawable.ic_pause);
+                        position--;
 
-                    if (isRepeat == true) {
-                        position += 1;
-                    }
-                    if (isRandom == true) {
-                        Random random = new Random();
-                        int index = random.nextInt(arrBaiHatCommon.size());
-                        if (index == position) {
-                            position = index - 1;
+                        if (position < 0) {
+                            position = arrBaiHatCommon.size() - 1;
                         }
-                        position = index;
-                    }
-                    new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                    fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
-                    getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
-                    updateTimeSong();
-                }
-            }
-            imgPrevious.setClickable(false);
-            imgNext.setClickable(false);
-            Handler handler1 = new Handler();
-            handler1.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    imgPrevious.setClickable(true);
-                    imgNext.setClickable(true);
-                }
-            }, 5000);
-            }
-        });
 
-        toolBarPhatNhac.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            mediaPlayer.stop();
-            finish();
-            arrBaiHatCommon.clear();
+                        if (isRepeat == true) {
+                            position ++;
+                            if (position >= arrBaiHatCommon.size()) {
+                                position = arrBaiHatCommon.size() - 1;
+                            }
+                        }
+                        if (isRandom == true) {
+                            int index = new Random().nextInt(arrBaiHatCommon.size());
+                            if (index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
+                        }
+                        new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
+                        fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
+                        updateTimeSong();
+                    }
+                }
+                //Void clicking continuously by user
+                imgPrevious.setClickable(false);
+                imgNext.setClickable(false);
+                //Delay 5 second and after that allow user continue to click
+                Handler handlerImgPrevious = new Handler();
+                handlerImgPrevious.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        imgPrevious.setClickable(true);
+                        imgNext.setClickable(true);
+                    }
+                }, 5000);
             }
         });
     }
@@ -301,12 +302,13 @@ public class MusicPlayerActivity extends AppCompatActivity {
             if (intent.hasExtra("danhsachcakhuc")) {
                 ArrayList<BaiHat> arrBaiHat = intent.getParcelableArrayListExtra("danhsachcakhuc");
                 arrBaiHatCommon = arrBaiHat;
+
             }
         }
     }
 
     private void addControls() {
-        //Khoi tao cac control
+        //Init control
 
         skTime = findViewById(R.id.seekbarcakhuc);
         txtTime = findViewById(R.id.txttimecakhuc);
@@ -323,6 +325,16 @@ public class MusicPlayerActivity extends AppCompatActivity {
         setSupportActionBar(toolBarPhatNhac);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolBarPhatNhac.setTitleTextColor(Color.WHITE);
+        toolBarPhatNhac.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                if (mediaPlayer != null) {
+                    mediaPlayer.stop();
+                    arrBaiHatCommon.clear();
+                }
+            }
+        });
 
 
         fragment_music_disc = new Fragment_Music_Disc();
@@ -336,15 +348,31 @@ public class MusicPlayerActivity extends AppCompatActivity {
         viewPagerMusicListPlayer.addFragment(fragment_music_disc);
         viewPagerMusicListPlayer.addFragment(fragment_music_lyric);
 
-
+        //Add all fragments into viewpager
         viewPagerPhatNhac.setAdapter(viewPagerMusicListPlayer);
-
-        fragment_music_disc = (Fragment_Music_Disc) viewPagerMusicListPlayer.getItem(1);
 
         if (arrBaiHatCommon.size() > 0) {
             getSupportActionBar().setTitle(arrBaiHatCommon.get(0).getTenBaiHat());
             new MusicPlayer().execute(arrBaiHatCommon.get(0).getLinkBaiHat());
             imgPlay.setImageResource(R.drawable.ic_pause);
+        }
+    }
+
+    @Override
+    public void onDataPass(int index, int key) {
+        if (key == 123){
+            position = index;
+            if (mediaPlayer.isPlaying() || mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
+
+            new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
+            fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
+            getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
+            imgPlay.setImageResource(R.drawable.ic_pause);
+            updateTimeSong();
         }
     }
 
@@ -362,17 +390,17 @@ public class MusicPlayerActivity extends AppCompatActivity {
                 mediaPlayer = new MediaPlayer();
                 mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 
-                //Tranh truong hop vao view phat nhac ma nhac da ket thuc
+                //Avoid when getting into view and music is stopped
                 mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
-                    mediaPlayer.stop();
-                    mediaPlayer.reset();
+                        mediaPlayer.stop();
+                        mediaPlayer.reset();
                     }
                 });
 
                 mediaPlayer.setDataSource(s);
-                mediaPlayer.prepare();//Co ham nay moi chay duoc nhac
+                mediaPlayer.prepare();//Must have this function to assure mediaPLayer is worked
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -384,74 +412,73 @@ public class MusicPlayerActivity extends AppCompatActivity {
     }
 
     private void updateTimeSong() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        final Handler handlerCheckEndSong = new Handler();
+        handlerCheckEndSong.postDelayed(new Runnable() {
             @Override
             public void run() {
-            if (mediaPlayer != null) {
-                skTime.setProgress(mediaPlayer.getCurrentPosition());
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-                txtTime.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
-                handler.postDelayed(this, 300);
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                    isNext = true;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    }
-                });
-            }
+                if (mediaPlayer != null) {
+                    skTime.setProgress(mediaPlayer.getCurrentPosition());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                    txtTime.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
+                    handlerCheckEndSong.postDelayed(this, 300);
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            isNext = true;
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
             }
         }, 300);
 
-        final Handler handler1 = new Handler();
-        handler1.postDelayed(new Runnable() {
+        final Handler handlerChangeSong = new Handler();
+        handlerChangeSong.postDelayed(new Runnable() {
             @Override
             public void run() {
-            if (isNext == true) {
-                if (position < arrBaiHatCommon.size()) {
-                    imgPlay.setImageResource(R.drawable.ic_pause);
-                    position++;
-                    if (isRepeat == true) {
-                        if (position == 0) {
-                            position = arrBaiHatCommon.size();
+                if (isNext == true) {
+                    if (position < arrBaiHatCommon.size()) {
+                        imgPlay.setImageResource(R.drawable.ic_pause);
+                        position++;
+                        if (isRepeat == true) {
+                            if (position == 0) {
+                                position = arrBaiHatCommon.size();
+                            }
+                            position -= 1;
                         }
-                        position -= 1;
-                    }
-                    if (isRandom == true) {
-                        Random random = new Random();
-                        int index = random.nextInt(arrBaiHatCommon.size());
-                        if (index == position) {
-                            position = index - 1;
+                        if (isRandom == true) {
+                            int index = new Random().nextInt(arrBaiHatCommon.size());
+                            if (index == position) {
+                                position = index - 1;
+                            }
+                            position = index;
                         }
-                        position = index;
+                        if (position > (arrBaiHatCommon.size() - 1)) {
+                            position = 0;
+                        }
+                        new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
+                        fragment_music_disc.setImage(arrBaiHatCommon.get(position).getHinhBaiHat());
+                        getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
                     }
-                    if (position > (arrBaiHatCommon.size() - 1)) {
-                        position = 0;
-                    }
-                    new MusicPlayer().execute(arrBaiHatCommon.get(position).getLinkBaiHat());
-                    fragment_music_disc.setImage(arrBaiHatCommon.get(position).getLinkBaiHat());
-                    getSupportActionBar().setTitle(arrBaiHatCommon.get(position).getTenBaiHat());
+                    imgPrevious.setClickable(false);
+                    imgNext.setClickable(false);
+                    Handler handlerImgNext = new Handler();
+                    handlerImgNext.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            imgPrevious.setClickable(true);
+                            imgNext.setClickable(true);
+                        }
+                    }, 5000);
+                    isNext = false;
+                    handlerImgNext.removeCallbacks(this);
+                } else {
+                    handlerChangeSong.postDelayed(this, 1000);
                 }
-                imgPrevious.setClickable(false);
-                imgNext.setClickable(false);
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        imgPrevious.setClickable(true);
-                        imgNext.setClickable(true);
-                    }
-                }, 5000);
-                isNext = false;
-                handler1.removeCallbacks(this);
-            } else {
-                handler1.postDelayed(this, 1000);
-            }
             }
         }, 1000);
     }
@@ -470,29 +497,5 @@ public class MusicPlayerActivity extends AppCompatActivity {
 
     private void hideProgressDialog() {
         progressDialog.dismiss();
-    }
-
-    class InitView extends AsyncTask<Void,Void,Void>{
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            showProgressDialog();
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            hideProgressDialog();
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
     }
 }

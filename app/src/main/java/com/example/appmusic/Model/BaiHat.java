@@ -108,6 +108,7 @@ public class BaiHat implements Parcelable {
         this.luotThich = luotThich;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
