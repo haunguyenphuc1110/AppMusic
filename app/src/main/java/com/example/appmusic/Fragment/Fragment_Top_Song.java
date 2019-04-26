@@ -13,12 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.appmusic.Activity.ThemeListActivity;
-import com.example.appmusic.Adapter.ThemeCategoryAdapter;
-import com.example.appmusic.Model.ChuDe;
+import com.example.appmusic.Activity.TopSongActivity;
+import com.example.appmusic.Adapter.TopSongAdapter;
+import com.example.appmusic.Model.TopSong;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
 import com.example.appmusic.Service.DataService;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,52 +27,51 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Fragment_Theme_Category extends Fragment {
+public class Fragment_Top_Song extends Fragment {
 
     View view;
-    RecyclerView recyclerView;
-    TextView txtMoreChuDeTheLoai;
-    ThemeCategoryAdapter themeCategoryAdapter;
+    RecyclerView recyclerViewTopSong;
+    TextView txtMoreTopSong;
+    TopSongAdapter topSongAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_theme_category, container ,false);
-        recyclerView = view.findViewById(R.id.recyclerviewchudetheloai);
-        txtMoreChuDeTheLoai = view.findViewById(R.id.txtxemthemchudetheloai);
+        view = inflater.inflate(R.layout.fragment_top_song, container, false);
+        recyclerViewTopSong = view.findViewById(R.id.recyclerviewtopsong);
+        txtMoreTopSong = view.findViewById(R.id.txtxemthemtopsong);
         getData();
         addEvents();
         return view;
     }
 
     private void addEvents() {
-        txtMoreChuDeTheLoai.setOnClickListener(new View.OnClickListener() {
+        txtMoreTopSong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ThemeListActivity.class));
+                startActivity(new Intent(getActivity(), TopSongActivity.class));
             }
         });
     }
 
     private void getData() {
         DataService dataService = APIService.getService();
-        Call<List<ChuDe>> callback = dataService.getChuDeTheLoai();
-        callback.enqueue(new Callback<List<ChuDe>>() {
+        Call<List<TopSong>> callback = dataService.getTopSongRandom();
+        callback.enqueue(new Callback<List<TopSong>>() {
             @Override
-            public void onResponse(Call<List<ChuDe>> call, Response<List<ChuDe>> response) {
-                ArrayList<ChuDe> arrChude = (ArrayList<ChuDe>) response.body();
-                themeCategoryAdapter = new ThemeCategoryAdapter(getActivity(),arrChude);
+            public void onResponse(Call<List<TopSong>> call, Response<List<TopSong>> response) {
+                ArrayList<TopSong> arrTopSong = (ArrayList<TopSong>) response.body();
+                topSongAdapter = new TopSongAdapter(getActivity(), arrTopSong);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                 linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(themeCategoryAdapter);
+                recyclerViewTopSong.setLayoutManager(linearLayoutManager);
+                recyclerViewTopSong.setAdapter(topSongAdapter);
             }
 
             @Override
-            public void onFailure(Call<List<ChuDe>> call, Throwable t) {
+            public void onFailure(Call<List<TopSong>> call, Throwable t) {
 
             }
         });
     }
-
 }

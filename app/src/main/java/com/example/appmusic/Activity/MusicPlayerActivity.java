@@ -85,14 +85,6 @@ public class MusicPlayerActivity extends AppCompatActivity implements Fragment_P
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        if (mediaPlayer.isPlaying() && mediaPlayer != null) {
-            mediaPlayer.pause();
-        }
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
         if (mediaPlayer != null) {

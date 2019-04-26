@@ -3,28 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
     app:cardCornerRadius="10dp"
-    android:layout_margin="5dp"
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <ImageView
-            android:id="@+id/imgdanhsachchude"
+            android:id="@+id/imgchudetheloai"
             android:background="@drawable/custom_background_banner"
             android:layout_gravity="center"
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:scaleType="fitXY" />
         <TextView
-            android:id="@+id/txttenchude"
+            android:id="@+id/txttenchudetheloai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imgdanhsachchude"
-            android:layout_alignTop="@+id/imgdanhsachchude"
-            android:layout_alignRight="@+id/imgdanhsachchude"
-            android:layout_alignBottom="@+id/imgdanhsachchude"
+            android:layout_alignLeft="@+id/imgchudetheloai"
+            android:layout_alignTop="@+id/imgchudetheloai"
+            android:layout_alignRight="@+id/imgchudetheloai"
+            android:layout_alignBottom="@+id/imgchudetheloai"
             android:layout_margin="1dp"
             android:gravity="center"
             android:text="THƯ GIÃN"

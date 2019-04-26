@@ -56,7 +56,6 @@ public class Fragment_Login extends Fragment implements View.OnClickListener, Go
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
-
             }
 
             @Override

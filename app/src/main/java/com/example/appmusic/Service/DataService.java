@@ -7,6 +7,7 @@ import com.example.appmusic.Model.ChuDeTheLoai;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.Model.QuangCao;
 import com.example.appmusic.Model.TheLoai;
+import com.example.appmusic.Model.TopSong;
 
 import java.util.List;
 
@@ -21,13 +22,17 @@ public interface DataService {
     @GET("Server/songbanner.php")
     Call<List<QuangCao>> getDataBanner();
 
+    //Get data topsong
+    @GET("Server/topsongdisplay.php")
+    Call<List<TopSong>> getTopSongRandom();
+
     //Get data playlist
     @GET("Server/playlistdisplay.php")
     Call<List<Playlist>> getPlaylistRandom();
 
     //Get data category music
-    @GET("Server/themeandkinddisplay.php")
-    Call<ChuDeTheLoai> getChuDeTheLoai();
+    @GET("Server/themedisplay.php")
+    Call<List<ChuDe>> getChuDeTheLoai();
 
     //Get data album
     @GET("Server/albumhot.php")
@@ -73,6 +78,10 @@ public interface DataService {
     //Get all album
     @GET("Server/danhsachalbum.php")
     Call<List<Album>> getAllAlbum();
+
+    //Get all topsong
+    @GET("Server/danhsachtopsong.php")
+    Call<List<TopSong>> getAllTopSong();
 
     //Update luot thich cho bai hat hot
     @FormUrlEncoded

@@ -17,12 +17,12 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.ViewHolder> {
+public class ThemeCategoryAdapter extends RecyclerView.Adapter<ThemeCategoryAdapter.ViewHolder> {
 
     Context context;
     ArrayList<ChuDe> arrChuDe;
 
-    public ThemeListAdapter(Context context, ArrayList<ChuDe> arrChuDe) {
+    public ThemeCategoryAdapter(Context context, ArrayList<ChuDe> arrChuDe) {
         this.context = context;
         this.arrChuDe = arrChuDe;
     }
@@ -31,15 +31,15 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  = inflater.inflate(R.layout.row_theme_list,viewGroup, false);
+        View view = inflater.inflate(R.layout.row_theme_category_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ChuDe chude = arrChuDe.get(i);
-        viewHolder.txtTenChuDe.setText(chude.getTenChuDe());
-        Picasso.with(context).load(chude.getHinhChuDe()).into(viewHolder.imgChuDe);
+        ChuDe chuDe = arrChuDe.get(i);
+        viewHolder.txtNameThemeCategory.setText(chuDe.getTenChuDe());
+        Picasso.with(context).load(chuDe.getHinhChuDe()).into(viewHolder.imgThemeCategory);
     }
 
     @Override
@@ -49,13 +49,13 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imgChuDe;
-        TextView txtTenChuDe;
+        ImageView imgThemeCategory;
+        TextView txtNameThemeCategory;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgChuDe = itemView.findViewById(R.id.imgdanhsachchude);
-            txtTenChuDe = itemView.findViewById(R.id.txttenchude);
+            imgThemeCategory = itemView.findViewById(R.id.imgchudetheloai);
+            txtNameThemeCategory = itemView.findViewById(R.id.txttenchudetheloai);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

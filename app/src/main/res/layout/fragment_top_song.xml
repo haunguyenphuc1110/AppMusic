@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content">
     <LinearLayout
-        android:id="@+id/linearplaylist"
+        android:id="@+id/lineartopsong"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
@@ -14,16 +14,16 @@
         android:orientation="horizontal"
         android:layout_height="wrap_content">
         <TextView
-            android:id="@+id/txttitleplaylist"
+            android:id="@+id/txttitletopsong"
             android:textSize="24sp"
             android:textColor="#000000"
             android:textStyle="bold"
-            android:text="KHỞI ĐỘNG TUẦN MỚI"
+            android:text="TOP 100"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/txtxemthemplaylist"
+            android:id="@+id/txtxemthemtopsong"
             android:text="Xem Thêm"
             android:textSize="18sp"
             android:textColor="#3F51B5"
@@ -31,8 +31,8 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewplaylist"
-        android:layout_below="@id/linearplaylist"
+        android:id="@+id/recyclerviewtopsong"
+        android:layout_below="@id/lineartopsong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp">

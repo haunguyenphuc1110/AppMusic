@@ -10,58 +10,57 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.appmusic.Activity.CategoryListActivity;
-import com.example.appmusic.Model.ChuDe;
+import com.example.appmusic.Activity.SongListActivity;
+import com.example.appmusic.Model.TopSong;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.ViewHolder> {
+public class TopSongListAdapter extends RecyclerView.Adapter<TopSongListAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<ChuDe> arrChuDe;
+    ArrayList<TopSong> arrTopSong;
 
-    public ThemeListAdapter(Context context, ArrayList<ChuDe> arrChuDe) {
+    public TopSongListAdapter(Context context, ArrayList<TopSong> arrTopSong) {
         this.context = context;
-        this.arrChuDe = arrChuDe;
+        this.arrTopSong = arrTopSong;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view  = inflater.inflate(R.layout.row_theme_list,viewGroup, false);
+        View view  = inflater.inflate(R.layout.row_topsong_list,viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ChuDe chude = arrChuDe.get(i);
-        viewHolder.txtTenChuDe.setText(chude.getTenChuDe());
-        Picasso.with(context).load(chude.getHinhChuDe()).into(viewHolder.imgChuDe);
+        TopSong topSong = arrTopSong.get(i);
+        viewHolder.txtNameTopSong.setText(topSong.getTenTopSong());
+        Picasso.with(context).load(topSong.getHinhTopSong()).into(viewHolder.imgTopSong);
     }
 
     @Override
     public int getItemCount() {
-        return arrChuDe.size();
+        return arrTopSong.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView imgChuDe;
-        TextView txtTenChuDe;
+        ImageView imgTopSong;
+        TextView txtNameTopSong;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgChuDe = itemView.findViewById(R.id.imgdanhsachchude);
-            txtTenChuDe = itemView.findViewById(R.id.txttenchude);
-
+            imgTopSong = itemView.findViewById(R.id.imgdanhsachtopsong);
+            txtNameTopSong = itemView.findViewById(R.id.txttentopsong);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(context, CategoryListActivity.class);
-                    intent.putExtra("chude", arrChuDe.get(getPosition()));
+                    Intent intent = new Intent(context, SongListActivity.class);
+                    intent.putExtra("itemtopsong", arrTopSong.get(getPosition()));
                     context.startActivity(intent);
                 }
             });

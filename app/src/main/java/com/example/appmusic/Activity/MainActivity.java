@@ -102,12 +102,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("facebook", profile);
                     startActivity(intent);
+                    finish();
                 }
                 else if (accessToken == null && googleSignInResult != null){
                     showProgressDialog();
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("google", profile);
                     startActivity(intent);
+                    finish();
                 }
             }
         });
