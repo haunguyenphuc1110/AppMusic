@@ -4,7 +4,7 @@ App Music on Android Studio.
 
 # Description
 
-This is Android project for Android Management subject. I'm still doing and get 80% progress. The code is available on Github. When I finish it, I will upload this app on Play Store. But now i don't have Play Store account for developer ^^. I will try my best to develop my app and upload it soon.
+This is Android project for Android Management subject. The code is available on Github. When I finish it, I will upload this app on Play Store. But now i don't have Play Store account for developer ^^. I will try my best to develop my app and upload it soon.
 
 # Features
 
