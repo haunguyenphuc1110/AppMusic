@@ -19,12 +19,11 @@
             app:expandedTitleMarginBottom="35dp"
             android:background="@drawable/custom_background_banner"
             android:fitsSystemWindows="true"
-            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Display2"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <android.support.v7.widget.Toolbar
-                app:popupTheme="@style/Theme.AppCompat.Light"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbardanhsach"
                 android:elevation="6dp"
@@ -44,19 +43,7 @@
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
-<!--
-    <android.support.design.widget.FloatingActionButton
-        android:backgroundTint="#A845DE"
-        android:src="@drawable/ic_floating_action_button"
-        app:fabSize="normal"
-        android:id="@+id/floatingactionbutton"
-        app:layout_anchorGravity="bottom|center"
-        app:layout_anchor="@id/appbarlayout"
-        app:layout_behavior="@string/bottom_sheet_behavior"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
--->
     <Button
         android:id="@+id/btnplayall"
         android:text="NGHE TẤT CẢ"

@@ -1,8 +1,8 @@
 package com.example.appmusic.Fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,6 +19,8 @@ import com.example.appmusic.Service.DataService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 import retrofit2.Call;
@@ -30,9 +32,8 @@ public class Fragment_Banner extends Fragment {
     ViewPager viewPager;
     CircleIndicator circleIndicator;
     BannerAdapter bannerAdapter;
-    Runnable runnable;//Like event that called when handler need
-    Handler handler;//Like management
-    int currentItem;//Store current index
+    ArrayList<QuangCao> banners;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,28 +56,13 @@ public class Fragment_Banner extends Fragment {
         callback.enqueue(new Callback<List<QuangCao>>() {
             @Override
             public void onResponse(Call<List<QuangCao>> call, Response<List<QuangCao>> response) {
-                ArrayList<QuangCao> banners = (ArrayList<QuangCao>) response.body();
+                banners = (ArrayList<QuangCao>) response.body();
                 bannerAdapter = new BannerAdapter(getActivity(),banners);
                 viewPager.setAdapter(bannerAdapter);
                 circleIndicator.setViewPager(viewPager);
-                handler = new Handler();
-                runnable = new Runnable() {
-                    @Override
-                    public void run() {
-                        currentItem = viewPager.getCurrentItem();
-                        currentItem++;
 
-                        //Check if ViewPager go to last current
-                        if(currentItem >= viewPager.getAdapter().getCount()){
-                            currentItem = 0;
-                        }
-
-                        //Else if normal
-                        viewPager.setCurrentItem(currentItem,true);
-                        handler.postDelayed(runnable,4500);
-                    }
-                };
-                handler.postDelayed(runnable,4500);//Display 4.5 second
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
             }
 
             @Override
@@ -84,5 +70,23 @@ public class Fragment_Banner extends Fragment {
 
             }
         });
+    }
+
+    private class SliderTimer extends TimerTask {
+
+        @Override
+        public void run() {
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (viewPager.getCurrentItem() < banners.size() - 1) {
+                        viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                    } else {
+                        viewPager.setCurrentItem(0);
+                    }
+                }
+            });
+        }
     }
 }

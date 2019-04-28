@@ -42,10 +42,19 @@ public interface DataService {
     @GET("Server/baihatyeuthich.php")
     Call<List<BaiHat>> getBaiHatHot();
 
+    //Get data recommendation
+    @GET("Server/danhsachbaihatgoiy.php")
+    Call<List<BaiHat>> getMusicRecommendation();
+
     //Get list song from banner
     @FormUrlEncoded
     @POST("Server/danhsachbaihat.php")
     Call<List<BaiHat>> getDanhSachBaiHatTheoQuangCao(@Field("idquangcao") String idquangcao);
+
+    //Get list song from topsong
+    @FormUrlEncoded
+    @POST("Server/danhsachbaihat.php")
+    Call<List<BaiHat>> getDanhSachBaiHatTheoTopSong(@Field("idtopsong") String idtopsong);
 
     //Get list song from playlist
     @FormUrlEncoded

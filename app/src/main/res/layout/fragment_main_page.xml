@@ -40,8 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <fragment
-            android:name="com.example.appmusic.Fragment.Fragment_Recommended_Music"
-            android:id="@+id/fragmentbaihathot"
+            android:name="com.example.appmusic.Fragment.Fragment_Music_Recommendation"
+            android:id="@+id/fragmentmusicrecommendation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

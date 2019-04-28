@@ -1,10 +1,17 @@
 package com.example.appmusic.Activity;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -17,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.appmusic.Adapter.MainViewPagerAdapter;
+import com.example.appmusic.Fragment.Fragment_Music_Chart;
 import com.example.appmusic.Fragment.Fragment_Music_Library;
 import com.example.appmusic.Fragment.Fragment_Main_Page;
 import com.example.appmusic.Model.LoginModel;
@@ -51,6 +59,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     ImageView imgRefresh;
     CircleImageView imgAccount;
     MainViewPagerAdapter mainViewPagerAdapter;
+
+    Fragment_Main_Page fragment_main_page;
+    Fragment_Music_Chart fragment_music_chart;
+    Fragment_Music_Library fragment_music_library;
+
     Button btnSearch;
     String link_pic;//Link picture profile
 
@@ -63,14 +76,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public static Profile profile;//Hold data and send it to new ProfileManagement Activity
 
-    ProgressDialog progressDialog;
-
     Intent intent;//Store key that ProfileManagement Activirty send to this Activity through Intent
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Check connection
+        if(!isConn()) {
+            Toast.makeText(MainActivity.this,"Network is not connected", Toast.LENGTH_LONG).show();
+            finish();
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         addControls();
 
         getFacebookProfile();
@@ -83,29 +101,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         addEvents();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        hideProgressDialog();
-    }
-
     private void addEvents() {
         imgAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (accessToken == null && googleSignInResult == null) {
-                    showProgressDialog();
                     startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
                 }
                 else if (accessToken != null && googleSignInResult == null) {
-                    showProgressDialog();
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("facebook", profile);
                     startActivity(intent);
                     finish();
                 }
                 else if (accessToken == null && googleSignInResult != null){
-                    showProgressDialog();
                     Intent intent = new Intent(MainActivity.this, ProfileManagementActivity.class);
                     intent.putExtra("google", profile);
                     startActivity(intent);
@@ -149,14 +159,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void init() {
         //Set up adapter
         mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        mainViewPagerAdapter.addFragment(new Fragment_Main_Page(), "Trang chủ");
-        mainViewPagerAdapter.addFragment(new Fragment_Music_Library(), "Cá nhân");
+
+        fragment_main_page = new Fragment_Main_Page();
+        fragment_music_chart = new Fragment_Music_Chart();
+        fragment_music_library = new Fragment_Music_Library();
+
+        mainViewPagerAdapter.addFragment(fragment_main_page, "Trang chủ");
+        mainViewPagerAdapter.addFragment(fragment_music_chart, "Music Chart");
+        mainViewPagerAdapter.addFragment(fragment_music_library, "Cá nhân");
         viewPager.setAdapter(mainViewPagerAdapter);
 
         //Set up Tab Layout
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_home);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_music_library);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_song_chart_black);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_music_library);
     }
 
     private void getFacebookProfile(){
@@ -252,26 +269,26 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         });
     }
 
-    private void showProgressDialog(){
-        if (progressDialog == null){
-            progressDialog = new ProgressDialog(this);
-            progressDialog.setIndeterminate(true);
-            progressDialog.show();
-        }else{
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
-    }
-
-    private void hideProgressDialog() {
-        if(progressDialog != null) {
-            progressDialog.dismiss();
-            progressDialog = null;
-        }
-    }
-
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+    private boolean isConn(){
+        boolean isWifiConn = false;
+        boolean isMobileConn = false;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+
+        for (NetworkInfo info : networkInfos){
+            if (info.getTypeName().equalsIgnoreCase("WIFI"))
+                if (info.isConnected())
+                    isWifiConn = true;
+            if (info.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (info.isConnected())
+                    isMobileConn = true;
+        }
+        return isWifiConn || isMobileConn;
     }
 
     //Using AsyncTask for loading picture profile from Facebook

@@ -9,18 +9,4 @@
         android:id="@+id/imgbackgroundbanner"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
-    <RelativeLayout
-        android:id="@+id/relative1"
-        android:layout_alignBottom="@+id/imgbackgroundbanner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imgsongbanner"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="2dp"
-            android:layout_width="80dp"
-            android:layout_height="80dp" />
-    </RelativeLayout>
 </RelativeLayout>

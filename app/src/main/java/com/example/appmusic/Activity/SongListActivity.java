@@ -28,6 +28,7 @@ import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.Model.QuangCao;
 import com.example.appmusic.Model.TheLoai;
+import com.example.appmusic.Model.TopSong;
 import com.example.appmusic.R;
 import com.example.appmusic.Service.APIService;
 import com.example.appmusic.Service.DataService;
@@ -53,10 +54,14 @@ public class SongListActivity extends AppCompatActivity {
     ImageView imgDanhSachCaKhuc;
     SongListAdapter songListAdapter;
     ArrayList<BaiHat> arrBaiHat;
+
+    TopSong topSong;
     QuangCao quangCao;
     Playlist playlist;
     TheLoai theLoai;
     Album album;
+
+
     AlertDialog dialog;
 
     @Override
@@ -76,6 +81,12 @@ public class SongListActivity extends AppCompatActivity {
 
         //Get data from Banner, playlist, album, concept to SongListActivity
         getData();
+
+        //Kiem tra top song co ton tai
+        if(topSong != null && !topSong.getTenTopSong().equals("")){
+            setValueInView(topSong.getTenTopSong(), topSong.getHinhTopSong());
+            getDataTopSong(topSong.getIdTopSong());
+        }
 
         //Kiem tra quang cao co ton tai
         if(quangCao != null && !quangCao.getTenBaiHat().equals("")){
@@ -101,6 +112,26 @@ public class SongListActivity extends AppCompatActivity {
             getDataAlbum(album.getIdAlbum());
         }
 
+    }
+
+    private void getDataTopSong(String idTopSong) {
+        DataService dataService = APIService.getService();
+        Call<List<BaiHat>> callback = dataService.getDanhSachBaiHatTheoTopSong(idTopSong);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                arrBaiHat = (ArrayList<BaiHat>) response.body();
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
+                addEvents();
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataAlbum(String idAlbum) {
@@ -184,7 +215,8 @@ public class SongListActivity extends AppCompatActivity {
     }
 
     private void setValueInView(String ten, String hinh) {
-        collapsingToolbarLayout.setTitle(ten);
+        collapsingToolbarLayout.setTitleEnabled(false);
+        getSupportActionBar().setTitle(ten);
         try {
             URL url = new URL(hinh);
             Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -206,6 +238,7 @@ public class SongListActivity extends AppCompatActivity {
     private void init() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -228,6 +261,9 @@ public class SongListActivity extends AppCompatActivity {
     private void getData() {
         Intent intent = getIntent();
         if (intent != null){
+            if (intent.hasExtra("itemtopsong")){
+                topSong = (TopSong) intent.getSerializableExtra("itemtopsong");
+            }
             if (intent.hasExtra("banner")){
                 quangCao = (QuangCao) intent.getSerializableExtra("banner");
             }

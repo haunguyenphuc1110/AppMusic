@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
             }
         });
     }

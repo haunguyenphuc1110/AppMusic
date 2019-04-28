@@ -10,7 +10,7 @@
         app:civ_border_width="0.5dp"
         android:src="@color/colorGray"
         android:layout_centerInParent="true"
-        android:layout_width="280dp"
-        android:layout_height="280dp" />
+        android:layout_width="250dp"
+        android:layout_height="250dp" />
 
 </RelativeLayout>

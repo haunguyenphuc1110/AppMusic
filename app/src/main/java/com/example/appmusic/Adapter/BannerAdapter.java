@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,8 @@ public class BannerAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.row_banner, null);
 
         ImageView imgBackGroundBanner = view.findViewById(R.id.imgbackgroundbanner);
-        ImageView imgSongBanner = view.findViewById(R.id.imgsongbanner);
 
         Picasso.with(context).load(arrBanner.get(position).getHinhQuangCao()).into(imgBackGroundBanner);
-        Picasso.with(context).load(arrBanner.get(position).getHinhBaiHat()).into(imgSongBanner);
-
 
         //Catch event when click banner
         view.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +59,16 @@ public class BannerAdapter extends PagerAdapter {
             }
         });
 
-        container.addView(view);
+        ViewPager viewPager = (ViewPager) container;
+        viewPager.addView(view, 0);
+
         return view;
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        container.removeView((View) object);
+        ViewPager viewPager = (ViewPager) container;
+        View view = (View) object;
+        viewPager.removeView(view);
     }
 }

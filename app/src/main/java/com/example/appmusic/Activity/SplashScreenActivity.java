@@ -19,6 +19,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
 
             }
-        },2000); //Delay 3 seconds
+        },3000); //Delay 3 seconds
     }
 }
