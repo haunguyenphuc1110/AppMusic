@@ -9,7 +9,7 @@
         android:id="@+id/txtlyric"
         android:gravity="center"
         android:textColor="#FFF"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_margin="5dp"
         android:text="Chạy ngay đi"
         android:layout_width="match_parent"

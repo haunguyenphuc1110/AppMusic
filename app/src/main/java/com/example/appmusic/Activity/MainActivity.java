@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         //Check connection
         if(!isConn()) {
             Toast.makeText(MainActivity.this,"Network is not connected", Toast.LENGTH_LONG).show();
-            finish();
+            startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
