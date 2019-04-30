@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.CategoryListActivity">
-
+    tools:context=".Activity.TopSongActivity">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbardanhsachtheloaitheochude"
+        android:id="@+id/toolbarcasi"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
@@ -15,8 +15,8 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewtheloaitheochude"
-        android:layout_below="@id/toolbardanhsachtheloaitheochude"
+        android:id="@+id/recyclerviewlistcasi"
+        android:layout_below="@id/toolbarcasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

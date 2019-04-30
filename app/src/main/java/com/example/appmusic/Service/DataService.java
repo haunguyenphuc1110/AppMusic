@@ -2,6 +2,7 @@ package com.example.appmusic.Service;
 
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.Model.BaiHat;
+import com.example.appmusic.Model.CaSi;
 import com.example.appmusic.Model.ChuDe;
 import com.example.appmusic.Model.ChuDeTheLoai;
 import com.example.appmusic.Model.Playlist;
@@ -42,9 +43,13 @@ public interface DataService {
     @GET("Server/baihatyeuthich.php")
     Call<List<BaiHat>> getBaiHatHot();
 
-    //Get data recommendation
+    //Get data song recommendation
     @GET("Server/danhsachbaihatgoiy.php")
     Call<List<BaiHat>> getMusicRecommendation();
+
+    //Get data casi
+    @GET("Server/casidisplay.php")
+    Call<List<CaSi>> getCaSi();
 
     //Get list song from banner
     @FormUrlEncoded
@@ -71,6 +76,11 @@ public interface DataService {
     @POST("Server/danhsachbaihat.php")
     Call<List<BaiHat>> getDanhSachBaiHatTheoAlbum(@Field("idalbum") String idalbum);
 
+    //Get list song from casi
+    @FormUrlEncoded
+    @POST("Server/danhsachbaihat.php")
+    Call<List<BaiHat>> getDanhSachBaiHatTheoCaSi(@Field("tencasi") String tencasi);
+
     //Get all playlist
     @GET("Server/danhsachcacplaylist.php")
     Call<List<Playlist>> getAllPlaylist();
@@ -91,6 +101,10 @@ public interface DataService {
     //Get all topsong
     @GET("Server/danhsachtopsong.php")
     Call<List<TopSong>> getAllTopSong();
+
+    //Get all casi
+    @GET("Server/danhsachcasi.php")
+    Call<List<CaSi>> getAllCaSi();
 
     //Update luot thich cho bai hat hot
     @FormUrlEncoded

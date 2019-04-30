@@ -44,6 +44,10 @@
             android:id="@+id/fragmentmusicrecommendation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.appmusic.Fragment.Fragment_Singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </ScrollView>

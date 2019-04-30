@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.TopSongActivity"></activity>
+        <activity android:name=".Activity.SingerActivity"></activity>
+        <activity
+            android:name=".Activity.TopSongActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ProfileManagementActivity"
             android:screenOrientation="portrait" />
@@ -41,6 +44,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

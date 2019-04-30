@@ -15,9 +15,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewalbum"
+        android:layout_margin="2dp"
         android:layout_below="@id/toolbardanhsachalbum"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
 

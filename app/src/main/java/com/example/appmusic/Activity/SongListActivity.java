@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.appmusic.Adapter.SongListAdapter;
 import com.example.appmusic.Model.Album;
 import com.example.appmusic.Model.BaiHat;
+import com.example.appmusic.Model.CaSi;
 import com.example.appmusic.Model.Playlist;
 import com.example.appmusic.Model.QuangCao;
 import com.example.appmusic.Model.TheLoai;
@@ -60,6 +61,7 @@ public class SongListActivity extends AppCompatActivity {
     Playlist playlist;
     TheLoai theLoai;
     Album album;
+    CaSi caSi;
 
 
     AlertDialog dialog;
@@ -112,6 +114,32 @@ public class SongListActivity extends AppCompatActivity {
             getDataAlbum(album.getIdAlbum());
         }
 
+        //Kiem tra casi co ton tai
+        if(caSi != null && !caSi.getTenCaSi().equals("")){
+            setSingerValueInView(caSi.getTenCaSi(), caSi.getHinhIcon(), caSi.getHinhBackground());
+            getDataSinger(caSi.getTenCaSi());
+        }
+
+    }
+
+    private void getDataSinger(String tenCaSi) {
+        DataService dataService = APIService.getService();
+        Call<List<BaiHat>> callback = dataService.getDanhSachBaiHatTheoCaSi(tenCaSi);
+        callback.enqueue(new Callback<List<BaiHat>>() {
+            @Override
+            public void onResponse(Call<List<BaiHat>> call, Response<List<BaiHat>> response) {
+                arrBaiHat = (ArrayList<BaiHat>) response.body();
+                songListAdapter = new SongListAdapter(SongListActivity.this, arrBaiHat );
+                recyclerViewDanhSachBaiHat.setLayoutManager(new LinearLayoutManager(SongListActivity.this));
+                recyclerViewDanhSachBaiHat.setAdapter(songListAdapter);
+                addEvents();
+            }
+
+            @Override
+            public void onFailure(Call<List<BaiHat>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getDataTopSong(String idTopSong) {
@@ -231,8 +259,26 @@ public class SongListActivity extends AppCompatActivity {
         }
 
         Picasso.with(this).load(hinh).into(imgDanhSachCaKhuc);
+    }
 
 
+    private void setSingerValueInView(String tenCaSi, String hinhIcon, String hinhBackground) {
+        collapsingToolbarLayout.setTitleEnabled(false);
+        getSupportActionBar().setTitle(tenCaSi);
+        try {
+            URL url = new URL(hinhBackground);
+            Bitmap bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                collapsingToolbarLayout.setBackground(bitmapDrawable);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Picasso.with(this).load(hinhIcon).into(imgDanhSachCaKhuc);
     }
 
     private void init() {
@@ -275,6 +321,9 @@ public class SongListActivity extends AppCompatActivity {
             }
             if (intent.hasExtra("itemalbum")){
                 album = (Album) intent.getSerializableExtra("itemalbum");
+            }
+            if (intent.hasExtra("itemcasi")){
+                caSi = (CaSi) intent.getSerializableExtra("itemcasi");
             }
         }
     }
