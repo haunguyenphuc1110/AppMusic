@@ -47,6 +47,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
         BaiHat baihat = arrBaiHat.get(i);
         viewHolder.txtTenBaiHat.setText(baihat.getTenBaiHat());
         viewHolder.txtTenCaSi.setText(baihat.getCaSi());
+        viewHolder.txtLike.setText(baihat.getLuotThich());
         viewHolder.txtIndexDanhSach.setText(i + 1 + "");
     }
 
@@ -58,7 +59,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtIndexDanhSach, txtTenBaiHat, txtTenCaSi;
+        TextView txtIndexDanhSach, txtTenBaiHat, txtTenCaSi, txtLike;
         ImageView imgLuotThich, imgAddPlaylist;
         ProgressDialog progressDialog;
 
@@ -67,6 +68,7 @@ public class SongListAdapter extends RecyclerView.Adapter<SongListAdapter.ViewHo
             txtIndexDanhSach = itemView.findViewById(R.id.txtdanhsachindex);
             txtTenBaiHat = itemView.findViewById(R.id.txttenbaihat);
             txtTenCaSi = itemView.findViewById(R.id.txttencasi);
+            txtLike = itemView.findViewById(R.id.txtluotthichsonglist);
             imgLuotThich = itemView.findViewById(R.id.imgluotthichdanhsachbaihat);
             imgAddPlaylist = itemView.findViewById(R.id.imgaddplaylist);
 

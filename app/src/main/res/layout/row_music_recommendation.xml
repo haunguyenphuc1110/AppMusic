@@ -9,8 +9,8 @@
         android:id="@+id/imgbaihatgoiy"
         android:background="@drawable/custom_background_banner"
         android:layout_margin ="4dp"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -47,6 +47,37 @@
             android:text="Sơn Tùng M-TP"
             android:textSize="14sp"
             android:textColor="#585454"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtluotthich"
+                android:layout_toRightOf="@id/imgbaihatgoiy"
+                android:layout_below="@id/txttenbathatgoiy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:maxWidth="150dp"
+                android:text="23"
+                android:textSize="13sp"
+                android:textColor="#585454"/>
+
+            <ImageView
+                android:id="@+id/imgluotthichdisplay"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_loved" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

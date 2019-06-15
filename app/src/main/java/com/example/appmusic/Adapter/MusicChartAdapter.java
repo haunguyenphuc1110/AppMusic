@@ -53,6 +53,7 @@ public class MusicChartAdapter extends RecyclerView.Adapter<MusicChartAdapter.Vi
             viewHolder.txtIndex.setText("0"+index);
         viewHolder.txtTenBaiHat.setText(baihat.getTenBaiHat());
         viewHolder.txtTenCaSi.setText(baihat.getCaSi());
+        viewHolder.txtLike.setText(baihat.getLuotThich());
         Picasso.with(context).load(baihat.getHinhBaiHat()).into(viewHolder.imgHinhBaiHat);
 
     }
@@ -64,7 +65,7 @@ public class MusicChartAdapter extends RecyclerView.Adapter<MusicChartAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtTenBaiHat, txtTenCaSi, txtIndex;
+        TextView txtTenBaiHat, txtTenCaSi, txtIndex, txtLike;
         ImageView imgHinhBaiHat, imgLuotThich, imgAddPlaylist;
         ProgressDialog progressDialog;
 
@@ -73,6 +74,7 @@ public class MusicChartAdapter extends RecyclerView.Adapter<MusicChartAdapter.Vi
             txtTenBaiHat = itemView.findViewById(R.id.txttenbathathot);
             txtTenCaSi = itemView.findViewById(R.id.txttencasibathathot);
             txtIndex = itemView.findViewById(R.id.txtindexbaihathot);
+            txtLike = itemView.findViewById(R.id.txtluotthichmusicchart);
             imgHinhBaiHat = itemView.findViewById(R.id.imgbaihathot);
             imgLuotThich = itemView.findViewById(R.id.imgluotthich);
             imgAddPlaylist = itemView.findViewById(R.id.imgplaylistaddrecommend);

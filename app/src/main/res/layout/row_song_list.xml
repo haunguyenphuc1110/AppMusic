@@ -42,6 +42,32 @@
             android:textSize="14sp"
             android:textColor="#837D7D" />
 
+        <TextView
+            android:id="@+id/txtluotthichsonglist"
+            android:layout_toRightOf="@id/txtdanhsachindex"
+            android:layout_below="@id/txttencasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:maxWidth="150dp"
+            android:text="23"
+            android:textSize="13sp"
+            android:textColor="#585454"/>
+
+        <ImageView
+            android:id="@+id/imgluotthichsonglist"
+            android:layout_toRightOf="@id/txtluotthichsonglist"
+            android:layout_below="@id/txttencasi"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_loved" />
+
+
         <ImageView
             android:id="@+id/imgaddplaylist"
             android:layout_width="40dp"

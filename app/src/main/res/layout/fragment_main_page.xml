@@ -15,11 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <fragment
-            android:name="com.example.appmusic.Fragment.Fragment_Banner"
-            android:id="@+id/fragmentbanner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <fragment
             android:name="com.example.appmusic.Fragment.Fragment_Top_Song"
             android:id="@+id/fragmenttopsong"
             android:layout_width="match_parent"
@@ -46,6 +41,11 @@
             android:layout_height="wrap_content"/>
         <fragment
             android:name="com.example.appmusic.Fragment.Fragment_Singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <fragment
+            android:name="com.example.appmusic.Fragment.Fragment_Banner"
+            android:id="@+id/fragmentbanner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

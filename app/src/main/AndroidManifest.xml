@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.SingerActivity"></activity>
+        <activity
+            android:name=".Activity.SingerActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Activity.TopSongActivity"
             android:screenOrientation="portrait" />

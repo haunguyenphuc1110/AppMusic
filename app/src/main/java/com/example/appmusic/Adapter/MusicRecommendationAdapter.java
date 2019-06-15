@@ -50,6 +50,7 @@ public class MusicRecommendationAdapter extends RecyclerView.Adapter<MusicRecomm
         BaiHat baihat = arrBaiHat.get(i);
         viewHolder.txtTenBaiHat.setText(baihat.getTenBaiHat());
         viewHolder.txtTenCaSi.setText(baihat.getCaSi());
+        viewHolder.txtLike.setText(baihat.getLuotThich());
         Picasso.with(context).load(baihat.getHinhBaiHat()).into(viewHolder.imgHinhBaiHat);
     }
 
@@ -60,13 +61,14 @@ public class MusicRecommendationAdapter extends RecyclerView.Adapter<MusicRecomm
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtTenBaiHat, txtTenCaSi, txtIndex;
+        TextView txtTenBaiHat, txtTenCaSi, txtLike;
         ImageView imgHinhBaiHat, imgLuotThich, imgAddPlaylist;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTenBaiHat = itemView.findViewById(R.id.txttenbathatgoiy);
             txtTenCaSi = itemView.findViewById(R.id.txttencasibathatgoiy);
+            txtLike = itemView.findViewById(R.id.txtluotthich);
             imgHinhBaiHat = itemView.findViewById(R.id.imgbaihatgoiy);
             imgLuotThich = itemView.findViewById(R.id.imgluotthichbaihatgoiy);
             imgAddPlaylist = itemView.findViewById(R.id.imgplaylistaddbaihatgoiy);
