@@ -2,9 +2,9 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +47,7 @@ public class BannerAdapter extends PagerAdapter {
 
         ImageView imgBackGroundBanner = view.findViewById(R.id.imgbackgroundbanner);
 
-        Picasso.with(context).load(arrBanner.get(position).getHinhQuangCao()).into(imgBackGroundBanner);
+        Picasso.get().load(arrBanner.get(position).getHinhQuangCao()).into(imgBackGroundBanner);
 
         //Catch event when click banner
         view.setOnClickListener(new View.OnClickListener() {

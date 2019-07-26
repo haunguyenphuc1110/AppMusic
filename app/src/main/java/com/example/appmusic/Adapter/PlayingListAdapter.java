@@ -1,17 +1,15 @@
 package com.example.appmusic.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Interface.RecyclerViewClickListenerInterface;
 import com.example.appmusic.Model.BaiHat;
 import com.example.appmusic.R;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,12 @@
     android:fitsSystemWindows="true"
     tools:context=".Activity.ProfileManagementActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="300dp">
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingtoolbarprofile"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleMarginBottom="35dp"
@@ -22,14 +22,14 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 app:popupTheme="@style/Theme.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbarprofile"
                 android:elevation="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="75dp">
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgprofilepicture"
@@ -41,12 +41,12 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp" />
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
@@ -139,6 +139,6 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

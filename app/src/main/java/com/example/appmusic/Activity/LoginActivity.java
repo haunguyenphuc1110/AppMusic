@@ -1,15 +1,14 @@
 package com.example.appmusic.Activity;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.example.appmusic.Adapter.LoginAdapter;
 import com.example.appmusic.Fragment.Fragment_Login;
-import com.example.appmusic.Fragment.Fragment_Register;
 import com.example.appmusic.R;
 
 public class LoginActivity extends AppCompatActivity {

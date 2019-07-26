@@ -2,8 +2,8 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         TheLoai theLoai = arrTheLoai.get(i);
         viewHolder.txtTenTheLoaiTheoChuDe.setText(theLoai.getTenTheLoai());
-        Picasso.with(context).load(theLoai.getHinhTheLoai()).into(viewHolder.imgTheLoaiTheoChuDe);
+        Picasso.get().load(theLoai.getHinhTheLoai()).into(viewHolder.imgTheLoaiTheoChuDe);
     }
 
     @Override

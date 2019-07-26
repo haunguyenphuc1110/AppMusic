@@ -1,7 +1,7 @@
 package com.example.appmusic.Model;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.facebook.AccessToken;
@@ -11,7 +11,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.tasks.OnFailureListener;
 
 
 public class LoginModel {

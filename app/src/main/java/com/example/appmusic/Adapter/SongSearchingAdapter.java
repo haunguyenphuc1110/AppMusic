@@ -2,8 +2,8 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +49,7 @@ public class SongSearchingAdapter extends RecyclerView.Adapter<SongSearchingAdap
         BaiHat baihat = arrBaiHat.get(i);
         viewHolder.txtTenBaiHat.setText(baihat.getTenBaiHat());
         viewHolder.txtTenCaSi.setText(baihat.getCaSi());
-        Picasso.with(context).load(baihat.getHinhBaiHat()).into(viewHolder.imgHinhBaiHat);
+        Picasso.get().load(baihat.getHinhBaiHat()).into(viewHolder.imgHinhBaiHat);
     }
 
     @Override

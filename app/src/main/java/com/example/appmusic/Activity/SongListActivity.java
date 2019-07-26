@@ -1,7 +1,6 @@
 package com.example.appmusic.Activity;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,17 +9,16 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.StrictMode;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.appmusic.Adapter.SongListAdapter;
 import com.example.appmusic.Model.Album;
@@ -258,7 +256,7 @@ public class SongListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Picasso.with(this).load(hinh).into(imgDanhSachCaKhuc);
+        Picasso.get().load(hinh).into(imgDanhSachCaKhuc);
     }
 
 
@@ -278,7 +276,7 @@ public class SongListActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Picasso.with(this).load(hinhIcon).into(imgDanhSachCaKhuc);
+        Picasso.get().load(hinhIcon).into(imgDanhSachCaKhuc);
     }
 
     private void init() {

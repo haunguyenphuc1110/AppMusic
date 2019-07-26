@@ -2,8 +2,8 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ public class ThemeListAdapter extends RecyclerView.Adapter<ThemeListAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ChuDe chude = arrChuDe.get(i);
         viewHolder.txtTenChuDe.setText(chude.getTenChuDe());
-        Picasso.with(context).load(chude.getHinhChuDe()).into(viewHolder.imgChuDe);
+        Picasso.get().load(chude.getHinhChuDe()).into(viewHolder.imgChuDe);
     }
 
     @Override

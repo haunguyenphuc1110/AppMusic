@@ -8,16 +8,15 @@ import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.appmusic.Adapter.ViewPagerMusicListPlayer;
 import com.example.appmusic.Fragment.Fragment_Music_Disc;

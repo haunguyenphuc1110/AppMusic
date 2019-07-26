@@ -2,8 +2,8 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ public class PlaylistListAdapter extends RecyclerView.Adapter<PlaylistListAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Playlist playlist = arrPlaylist.get(i);
         viewHolder.txtTenPlaylist.setText(playlist.getTen());
-        Picasso.with(context).load(playlist.getHinhIcon()).into(viewHolder.imgPlaylist);
+        Picasso.get().load(playlist.getHinhIcon()).into(viewHolder.imgPlaylist);
     }
 
     @Override

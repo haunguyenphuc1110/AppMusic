@@ -1,15 +1,14 @@
 package com.example.appmusic.Fragment;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import com.example.appmusic.Activity.MusicPlayerActivity;
 import com.example.appmusic.Adapter.MusicLyricAdapter;
 import com.example.appmusic.R;
-import com.example.appmusic.Service.APIService;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +23,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import dmax.dialog.SpotsDialog;
 

@@ -2,11 +2,11 @@ package com.example.appmusic.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +21,6 @@ import com.example.appmusic.Service.APIService;
 import com.example.appmusic.Service.DataService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;

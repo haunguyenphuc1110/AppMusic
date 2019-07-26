@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,12 +8,12 @@
     android:fitsSystemWindows="true"
     tools:context=".Activity.SongListActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout"
         android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="300dp">
-        <android.support.design.widget.CollapsingToolbarLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingtoolbar"
             app:expandedTitleGravity="center|bottom"
             app:expandedTitleMarginBottom="35dp"
@@ -22,14 +22,14 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbardanhsach"
                 android:elevation="6dp"
                 android:layout_width="match_parent"
                 android:layout_height="75dp">
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
             <ImageView
                 android:id="@+id/imgdanhsachcakhuc"
@@ -40,9 +40,9 @@
                 android:layout_marginBottom="35dp"
                 android:scaleType="fitXY" />
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <Button
         android:id="@+id/btnplayall"
@@ -56,18 +56,18 @@
         app:layout_anchorGravity="bottom|center"
         app:layout_anchor="@id/appbarlayout"/>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="30dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerviewdanhsachbaihat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.NestedScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.core.widget.NestedScrollView>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

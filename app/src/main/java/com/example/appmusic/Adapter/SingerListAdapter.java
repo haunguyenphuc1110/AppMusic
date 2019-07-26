@@ -2,17 +2,15 @@ package com.example.appmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.appmusic.Activity.SongListActivity;
 import com.example.appmusic.Model.CaSi;
-import com.example.appmusic.Model.TopSong;
 import com.example.appmusic.R;
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +40,7 @@ public class SingerListAdapter extends RecyclerView.Adapter<SingerListAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         CaSi caSi = arrCaSi.get(i);
         viewHolder.txtNameCaSi.setText(caSi.getTenCaSi());
-        Picasso.with(context).load(caSi.getHinhIcon()).into(viewHolder.imgCaSi);
+        Picasso.get().load(caSi.getHinhIcon()).into(viewHolder.imgCaSi);
     }
 
     @Override

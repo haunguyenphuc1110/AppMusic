@@ -6,20 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.TopSongActivity">
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbartopsong"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerviewlisttopsong"
         android:layout_below="@id/toolbartopsong"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

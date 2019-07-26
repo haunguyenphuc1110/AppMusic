@@ -10,18 +10,18 @@
     android:weightSum="10"
     tools:context=".Activity.MusicPlayerActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbartrinhphatnhac"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
     
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewpagertrinhphatnhac"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8">
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"
